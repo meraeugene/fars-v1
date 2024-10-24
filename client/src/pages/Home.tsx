@@ -286,13 +286,9 @@ const Home = () => {
       <div
         ref={homeRef}
         id="home"
-        className="pt-16 md:pt-20 xl:pt-28 bg-[#f0f4ff]"
+        className="pt-16 md:pt-20 xl:pt-28 bg-[#f0f4ff] border-b"
       >
         <Hero onGetStartedClick={handleGetStartedClick} />
-      </div>
-
-      <div ref={featuredReviewsRef} id="featured-reviews">
-        <FeaturedReviews />
       </div>
 
       <div
@@ -301,6 +297,10 @@ const Home = () => {
         className="pt-16 bg-[#f0f4ff]  xl:pt-24"
       >
         <ReviewForm />
+      </div>
+
+      <div ref={featuredReviewsRef} id="featured-reviews">
+        <FeaturedReviews />
       </div>
 
       <div
@@ -323,22 +323,22 @@ const Home = () => {
           <div className="columns-1 md:columns-2 lg:columns-3 mt-12 gap-x-8 gap-y-4 xl:columns-4 ">
             {allReviews.map((review) => (
               <div
-                className="flex bg-[#fff] flex-col break-inside-avoid mb-8"
+                className="flex bg-[#fff] flex-col break-inside-avoid mb-8  rounded-xl shadow-xl"
                 key={review._id}
-                data-aos="fade-right"
+                // data-aos="fade-right"
               >
                 {review.image && (
-                  <div className="review-card-image__container  border-blue-500 border rounded-tr-lg rounded-tl-lg border-b-0  ">
+                  <div className="review-card-image__container    ">
                     <img
                       src={review.image}
                       alt="image"
-                      className="rounded-tr-lg rounded-tl-lg object-cover"
+                      className="rounded-tr-xl rounded-tl-xl object-cover"
                       loading="lazy"
                     />
                   </div>
                 )}
                 <div
-                  className={` review-card-info__container relative  border-[#4a71ff] p-4  border rounded-lg ${
+                  className={` review-card-info__container relative   p-4   ${
                     review.image ? "rounded-tr-none rounded-tl-none" : ""
                   }`}
                 >
@@ -348,11 +348,11 @@ const Home = () => {
                       return (
                         <span key={index}>
                           {review.rating >= starValue ? (
-                            <FaStar size={16} color="#3b82f6" />
+                            <FaStar size={16} color="#ff8873" />
                           ) : review.rating >= starValue - 0.5 ? (
-                            <FaStarHalfAlt size={16} color="#3b82f6" />
+                            <FaStarHalfAlt size={16} color="#ff8873" />
                           ) : (
-                            <FaRegStar size={16} color="#3b82f6" />
+                            <FaRegStar size={16} color="#ff8873" />
                           )}
                         </span>
                       );
@@ -452,8 +452,8 @@ const Home = () => {
                   {review.replies.length > 0 && (
                     <div className="mt-4">
                       {review.replies.map((reply, index) => (
-                        <div key={index} className="bg-gray-100 p-2 rounded-md">
-                          <p className="text-sm flex flex-wrap items-center gap-1 text-gray-800 leading-[1.6] font-normal">
+                        <div key={index} className="bg-blue-50 p-2 rounded-md">
+                          <p className="text-sm flex flex-wrap items-center gap-1 text-gray-800 leading-[1.6] font-normal ">
                             {reply.reply}
                             <span className="text-sm text-gray-800 leading-[1.6] font-semibold">
                               - {reply.name}

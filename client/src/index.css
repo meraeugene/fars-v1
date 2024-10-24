@@ -198,6 +198,7 @@ body.menu-open {
     @apply text-white bg-[#4a71ff] border-[#4a71ff] hover:bg-[#3b5ad1] border px-2 py-3 rounded-lg w-full;
   }
 }
+
 @layer base {
   :root {
     --background: 0 0% 100%;

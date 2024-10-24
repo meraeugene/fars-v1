@@ -127,7 +127,7 @@ export function ReviewForm() {
                   placeholder="Tyler Durden"
                   type="text"
                   className={`
-                    flex h-10 w-full bg-[#fff] dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-2 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border
+                    flex  w-full bg-[#fff] dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-3 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border shadow-xl
                     ${errors.name && touched.name ? errorClass : ""}
                   `}
                 />
@@ -144,17 +144,27 @@ export function ReviewForm() {
                   as="select"
                   name="rating"
                   id="rating"
-                  className={`flex h-10 w-full bg-[#fff] dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-2 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border
+                  className={`flex  w-full   shadow-input rounded-md px-3 py-3 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border shadow-xl
                     ${errors.rating && touched.rating ? errorClass : ""}`}
                 >
-                  <option value="" hidden>
+                  <option className="text-black" value="" hidden>
                     Select Rating
                   </option>
-                  <option value="5">5 - Excellent</option>
-                  <option value="4">4 - Very Good</option>
-                  <option value="3">3 - Good</option>
-                  <option value="2">2 - Fair</option>
-                  <option value="1">1 - Poor</option>
+                  <option className="text-black" value="5">
+                    5 - Excellent
+                  </option>
+                  <option className="text-black" value="4">
+                    4 - Very Good
+                  </option>
+                  <option className="text-black" value="3">
+                    3 - Good
+                  </option>
+                  <option className="text-black" value="2">
+                    2 - Fair
+                  </option>
+                  <option className="text-black" value="1">
+                    1 - Poor
+                  </option>
                 </Field>
                 <ErrorMessage
                   name="rating"
@@ -172,7 +182,7 @@ export function ReviewForm() {
                   placeholder="Share your love! Tell us what you thought about our service in a quick review."
                   name="feedback"
                   className={`
-                    flex h-10 w-full bg-[#fff] dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-2 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border
+                    flex h-10 w-full bg-[#fff] dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 shadow-xl py-2 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border
                     ${errors.feedback && touched.feedback ? errorClass : ""}`}
                 />
                 <ErrorMessage
@@ -202,7 +212,7 @@ export function ReviewForm() {
 
                 <label
                   htmlFor="image-upload"
-                  className="justify-center gap-2 w-full cursor-pointer text-sm text-gray-500 border border-[#4a71ff] bg-[#fff] flex items-center py-2 px-4 rounded-md text-center hover:bg-blue-50"
+                  className="justify-center gap-2 w-full cursor-pointer text-sm text-gray-500 border border-[#4a71ff] bg-[#fff] flex items-center py-3 px-3 rounded-md text-center hover:bg-blue-50 shadow-xl"
                 >
                   <GrFormUpload fontSize={20} />
                   Choose an image

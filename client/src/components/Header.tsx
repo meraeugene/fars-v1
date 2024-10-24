@@ -129,8 +129,8 @@ const Header = () => {
           <ul className=" flex  gap-6 ">
             {[
               "home",
-              "featured-reviews",
               "feedback",
+              "featured-reviews",
               "all-reviews",
               "FAQs",
             ].map((sectionId) => (
@@ -187,8 +187,8 @@ const Header = () => {
               <ul className="mt-10 flex flex-col gap-6 ">
                 {[
                   "home",
-                  "featured-reviews",
                   "feedback",
+                  "featured-reviews",
                   "all-reviews",
                   "FAQs",
                 ].map((sectionId) => (

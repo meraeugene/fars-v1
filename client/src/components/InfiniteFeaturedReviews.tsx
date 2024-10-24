@@ -18,7 +18,7 @@ const FeaturedReviewCard = ({
   return (
     <figure
       className={cn(
-        "relative w-64 cursor-pointer overflow-hidden rounded-xl bg-[#fff] border border-[#4a71ff] p-4 "
+        "relative w-64 cursor-pointer overflow-hidden rounded-xl bg-[#fff] border border-[#4a71ff] p-4 shadow-xl "
       )}
     >
       <div className="flex flex-col  gap-2">
@@ -28,11 +28,11 @@ const FeaturedReviewCard = ({
             return (
               <span key={index}>
                 {rating >= starValue ? (
-                  <FaStar size={16} color="#3b82f6" />
+                  <FaStar size={16} color="#ff8873" />
                 ) : rating >= starValue - 0.5 ? (
-                  <FaStarHalfAlt size={16} color="#4a71ff" />
+                  <FaStarHalfAlt size={16} color="#ff8873" />
                 ) : (
-                  <FaRegStar size={16} color="#4a71ff" />
+                  <FaRegStar size={16} color="#ff8873" />
                 )}
               </span>
             );

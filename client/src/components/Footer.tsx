@@ -12,7 +12,7 @@ const Footer = () => {
 
       {/* Copyright */}
       <h1 className="text-center text-xs md:text-sm">
-        ⓒ {currentYear} FARS. All rights reserved.
+        ⓒ {currentYear} Feedback and Review System. All rights reserved.
       </h1>
     </footer>
   );
