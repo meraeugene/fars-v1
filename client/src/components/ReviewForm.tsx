@@ -77,8 +77,7 @@ export function ReviewForm() {
     };
 
     try {
-      const res = await createReview(data).unwrap();
-      toast.success(res.message);
+      await createReview(data).unwrap();
 
       resetForm();
       setImage(""); // Clear the image state
@@ -98,11 +97,11 @@ export function ReviewForm() {
     "border-red-500 border focus:outline focus:outline-red-200";
 
   return (
-    <div className="max-w-md w-full  mx-auto rounded-none md:rounded-2xl px-5 bg-white dark:bg-black">
-      <h2 className="font-bold h3-bold text-center text-neutral-800 dark:text-neutral-200">
+    <div className="max-w-md w-full  mx-auto rounded-none md:rounded-2xl px-5 ">
+      <h2 className="font-bold h3-bold text-center text-[#0c1b4d]">
         Your Feedback
       </h2>
-      <p className="text-neutral-600 text-center text-sm max-w-sm mt-2 dark:text-neutral-300">
+      <p className="text-[#777fa1] lg:text-base text-center text-sm max-w-sm mt-2">
         We value your feedback! Help us improve our service by sharing your
         thoughts.
       </p>
@@ -118,8 +117,8 @@ export function ReviewForm() {
         onSubmit={handleSubmit}
       >
         {({ isSubmitting, setFieldValue, errors, touched }) => (
-          <Form className="mt-8">
-            <div className="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-2 mb-6">
+          <Form className="mt-10">
+            <div className="flex flex-col space-y-4 md:space-y-4  mb-6 md:mb-8">
               <label htmlFor="name" className="flex flex-col gap-2">
                 Name
                 <Field
@@ -128,7 +127,7 @@ export function ReviewForm() {
                   placeholder="Tyler Durden"
                   type="text"
                   className={`
-                    flex h-10 w-full bg-gray-50 dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-2 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-blue-500 border
+                    flex h-10 w-full bg-[#fff] dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-2 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border
                     ${errors.name && touched.name ? errorClass : ""}
                   `}
                 />
@@ -145,7 +144,7 @@ export function ReviewForm() {
                   as="select"
                   name="rating"
                   id="rating"
-                  className={`flex h-10 w-full bg-gray-50 dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-2 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-blue-500 border
+                  className={`flex h-10 w-full bg-[#fff] dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-2 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border
                     ${errors.rating && touched.rating ? errorClass : ""}`}
                 >
                   <option value="" hidden>
@@ -173,7 +172,7 @@ export function ReviewForm() {
                   placeholder="Share your love! Tell us what you thought about our service in a quick review."
                   name="feedback"
                   className={`
-                    flex h-10 w-full bg-gray-50 dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-2 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-blue-500 border
+                    flex h-10 w-full bg-[#fff] dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-2 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border
                     ${errors.feedback && touched.feedback ? errorClass : ""}`}
                 />
                 <ErrorMessage
@@ -203,7 +202,7 @@ export function ReviewForm() {
 
                 <label
                   htmlFor="image-upload"
-                  className="justify-center gap-2 w-full cursor-pointer text-sm text-gray-500 border border-blue-500 flex items-center py-2 px-4 rounded-md text-center hover:bg-blue-100"
+                  className="justify-center gap-2 w-full cursor-pointer text-sm text-gray-500 border border-[#4a71ff] bg-[#fff] flex items-center py-2 px-4 rounded-md text-center hover:bg-blue-50"
                 >
                   <GrFormUpload fontSize={20} />
                   Choose an image
@@ -222,7 +221,7 @@ export function ReviewForm() {
             </div>
 
             <button
-              className="border-blue-500 border h-[40px] rounded-lg w-full  "
+              className="cta-button flex items-center justify-center border h-[45px] rounded-lg w-full  "
               type="submit"
               disabled={isSubmitting || uploadingImage}
             >

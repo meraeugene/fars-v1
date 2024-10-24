@@ -24,6 +24,6 @@ router.put("/:id/like", checkObjectId, likeReview); // Like a review
 router.put("/:id/unlike", checkObjectId, unlikeReview); // Unlike a review
 router.put("/:id/acknowledge", adminProtect, checkObjectId, acknowledgeReview); // Acknowledge review by admin
 router.delete("/:id", adminProtect, checkObjectId, deleteReview); // Delete review
-router.post("/:id/reply", checkObjectId, replyToReview); // Reply to a review
+router.post("/:id/reply", adminProtect, checkObjectId, replyToReview); // Reply to a review
 
 export default router;

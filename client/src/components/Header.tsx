@@ -65,7 +65,7 @@ const Header = () => {
 
   const logoutHandler = async () => {
     setMobileNav((prev) => !prev);
-    document.body.classList.toggle("menu-open");
+    document.body.classList.remove("menu-open");
 
     try {
       await logoutAdmin({}).unwrap();
@@ -96,103 +96,132 @@ const Header = () => {
   // Scroll Section Color Change Logic
   const [activeSection, setActiveSection] = useState("");
 
-  useEffect(() => {
-    const sections = ["hero", "featured-reviews", "feedback", "all-reviews"];
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.5, // Trigger when 50% of the section is visible
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    }, options);
-
-    sections.forEach((sectionId) => {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        observer.observe(section);
-      }
-    });
-
-    return () => {
-      sections.forEach((sectionId) => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-          observer.unobserve(section);
-        }
-      });
-    };
-  }, []);
-
   // Function to handle scrolling
   const scrollToSection = (id: string) => {
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
+      setActiveSection(id); // Set the clicked section as active
       setMobileNav(false);
       document.body.classList.remove("menu-open");
     }
   };
 
   return (
-    <header className="fixed w-full top-0 z-30 bg-white">
-      <div className="border-b w-full  nav-mobile__container flex items-center justify-between py-2 px-4">
+    <header className="fixed w-full top-0 z-30 bg-[#f0f4ff]">
+      <div className=" w-full border-b-[#e0e4f5] border  nav-mobile__container flex items-center justify-between py-2 px-5 md:px-10 lg:px-16 lg:hidden ">
         <div className="logo flex items-center gap-2">
-          <MdOutlineLocalLaundryService fontSize={30} />
-          <h1>Zerca</h1>
+          <MdOutlineLocalLaundryService fontSize={30} color="#2563eb" />
+          <h1 className="font-semibold text-[#0c1b4d]">FARS</h1>
         </div>
         <button onClick={toggleNav}>
           <RxHamburgerMenu fontSize={20} />
         </button>
       </div>
 
+      <div className=" w-full border-b-[#e0e4f5] border  nav__container  lg:items-center justify-between py-2 px-5 md:px-10 lg:px-16 hidden lg:flex xl:px-60 xl:py-3 ">
+        <div className="logo flex items-center gap-2">
+          <MdOutlineLocalLaundryService fontSize={30} color="#2563eb" />
+          <h1 className="font-semibold">FARS</h1>
+        </div>
+
+        <nav>
+          <ul className=" flex  gap-6 ">
+            {[
+              "home",
+              "featured-reviews",
+              "feedback",
+              "all-reviews",
+              "FAQs",
+            ].map((sectionId) => (
+              <li
+                key={sectionId}
+                onClick={() => scrollToSection(sectionId)}
+                className={`text-base cursor-pointer hover:text-[#0c1b4d] capitalize transition-all duration-300 ease-in-out  ${
+                  activeSection === sectionId
+                    ? "text-[#0c1b4d] font-semibold"
+                    : ""
+                }`}
+              >
+                {sectionId.replace("-", " ")}
+              </li>
+            ))}
+            {!isLoggedIn && (
+              <li
+                className="cursor-pointer text-base transition-all duration-300 ease-in-out"
+                onClick={toggleAdminPinModal}
+              >
+                Login as Owner
+              </li>
+            )}
+            {isLoggedIn && (
+              <>
+                <li
+                  onClick={toggleResetPinModal}
+                  className="cursor-pointer text-base transition-all duration-300 ease-in-out"
+                >
+                  Reset Admin PIN
+                </li>
+                <li
+                  className="cursor-pointer text-base transition-all duration-300 ease-in-out"
+                  onClick={logoutHandler}
+                >
+                  Logout
+                </li>
+              </>
+            )}
+          </ul>
+        </nav>
+      </div>
+
       {mobileNav && (
-        <div className=" mobile-nav slide-in-right nav-color fixed right-0 top-0 z-[50]     h-screen w-[60%]  md:hidden">
+        <div className=" mobile-nav slide-in-right nav-color fixed right-0 top-0 z-[50]     h-screen w-[60%] md:w-1/3 lg:hidden">
           <div className="relative p-10  px-8">
             <button
               onClick={toggleNav}
-              className="absolute right-[13px] top-[12px]"
+              className="absolute right-[13px] top-[12px] md:right-[37px]"
             >
               <IoCloseOutline fontSize={25} />
             </button>
             <nav>
               <ul className="mt-10 flex flex-col gap-6 ">
-                {["hero", "featured-reviews", "feedback", "all-reviews"].map(
-                  (sectionId) => (
-                    <li
-                      key={sectionId}
-                      onClick={() => scrollToSection(sectionId)}
-                      className={`text-lg capitalize transition-all duration-300 ease-in-out ${
-                        activeSection === sectionId ? "text-blue-600" : ""
-                      }`}
-                    >
-                      {sectionId.replace("-", " ")}
-                    </li>
-                  )
-                )}
+                {[
+                  "home",
+                  "featured-reviews",
+                  "feedback",
+                  "all-reviews",
+                  "FAQs",
+                ].map((sectionId) => (
+                  <li
+                    key={sectionId}
+                    onClick={() => scrollToSection(sectionId)}
+                    className={`text-base cursor-pointer capitalize transition-all duration-300 ease-in-out ${
+                      activeSection === sectionId
+                        ? "text-[#0c1b4d] font-semibold"
+                        : ""
+                    }`}
+                  >
+                    {sectionId.replace("-", " ")}
+                  </li>
+                ))}
                 {!isLoggedIn && (
                   <li
-                    className=" text-lg transition-all duration-300 ease-in-out"
+                    className=" text-lg cursor-pointer transition-all duration-300 ease-in-out"
                     onClick={toggleAdminPinModal}
                   >
-                    Login as Admin
+                    Login as Owner
                   </li>
                 )}
                 {isLoggedIn && (
                   <>
                     <li
                       onClick={toggleResetPinModal}
-                      className=" text-lg transition-all duration-300 ease-in-out"
+                      className=" text-base  cursor-pointer transition-all duration-300 ease-in-out"
                     >
                       Reset Admin PIN
                     </li>
                     <li
-                      className=" text-lg transition-all duration-300 ease-in-out"
+                      className=" text-base  cursor-pointer transition-all duration-300 ease-in-out"
                       onClick={logoutHandler}
                     >
                       Logout

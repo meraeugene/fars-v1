@@ -83,22 +83,24 @@ const ResetAdminPinModal = ({
 
   return (
     <div
-      className="overlay fixed inset-0 z-10 bg-[rgba(210,210,215,0.35)] backdrop-blur-[4px] transition-all duration-300"
+      className="overlay fixed inset-0 z-10  backdrop-blur-[4px] transition-all duration-300 bg-[rgba(12,27,77,0.15)] "
       onClick={closeResetPinModal}
     >
       <form
         onSubmit={handleResetPin}
-        className="fixed-container z-20 flex-col w-[80%] opacity-100 transition-all duration-300 md:border md:border-r-0 md:border-t-0 md:border-l-[#d2d2d7] rounded-md flex gap-6"
+        className="fixed-container z-20 flex-col w-[80%] opacity-100 transition-all duration-300  lg:w-[30%] xl:w-[20%] rounded-md flex gap-6"
         onClick={(e) => e.stopPropagation()}
       >
         <div>
-          <h3 className="text-lg mb-4">Enter Old PIN</h3>
+          <h3 className="text-lg text-[#0c1b4d] font-bold mb-4 uppercase">
+            Enter Old PIN
+          </h3>
           <div className="input__container flex gap-4">
             {[...Array(4)].map((_, index) => (
               <input
                 key={index}
                 ref={(el) => (oldPinRefs.current[index] = el!)}
-                type="text"
+                type="password"
                 maxLength={1}
                 className="border w-full focus:outline focus:outline-blue-400 focus:outline-1 h-[60px] rounded-lg border-blue-500 p-4 text-center text-2xl"
                 onChange={(e) => handleInputChange(e, index, true)} // Handle input for old pin
@@ -109,13 +111,15 @@ const ResetAdminPinModal = ({
         </div>
 
         <div>
-          <h3 className="text-lg mb-4">Enter New PIN</h3>
+          <h3 className="text-lg font-bold text-[#0c1b4d] mb-4 uppercase">
+            Enter New PIN
+          </h3>
           <div className="input__container flex gap-4">
             {[...Array(4)].map((_, index) => (
               <input
                 key={index}
                 ref={(el) => (newPinRefs.current[index] = el!)}
-                type="text"
+                type="password"
                 maxLength={1}
                 className="border w-full focus:outline focus:outline-blue-400 focus:outline-1 h-[60px] rounded-lg border-blue-500 p-4 text-center text-2xl"
                 onChange={(e) => handleInputChange(e, index, false)} // Handle input for new pin
@@ -126,7 +130,7 @@ const ResetAdminPinModal = ({
         </div>
 
         <button
-          className="p-3 tracking-widest text-lg border-blue-500 rounded-lg border bg-white"
+          className="p-3 tracking-widest cta-button text-lg  transition-all duration-300 ease-in-out "
           onClick={handleResetPin}
           disabled={isLoading}
         >

@@ -18,7 +18,7 @@ const FeaturedReviewCard = ({
   return (
     <figure
       className={cn(
-        "relative w-64 cursor-pointer overflow-hidden rounded-xl border border-blue-500 p-4 "
+        "relative w-64 cursor-pointer overflow-hidden rounded-xl bg-[#fff] border border-[#4a71ff] p-4 "
       )}
     >
       <div className="flex flex-col  gap-2">
@@ -30,9 +30,9 @@ const FeaturedReviewCard = ({
                 {rating >= starValue ? (
                   <FaStar size={16} color="#3b82f6" />
                 ) : rating >= starValue - 0.5 ? (
-                  <FaStarHalfAlt size={16} color="#3b82f6" />
+                  <FaStarHalfAlt size={16} color="#4a71ff" />
                 ) : (
-                  <FaRegStar size={16} color="#3b82f6" />
+                  <FaRegStar size={16} color="#4a71ff" />
                 )}
               </span>
             );
@@ -41,7 +41,7 @@ const FeaturedReviewCard = ({
 
         <blockquote className="text-sm">{feedback}</blockquote>
       </div>
-      <figcaption className="mt-4  text-sm font-medium dark:text-white">
+      <figcaption className="mt-4  text-sm font-medium text-[#0c1b4d]">
         {name}
       </figcaption>
     </figure>
@@ -75,8 +75,8 @@ export function InfiniteFeaturedReviews() {
   }
 
   return (
-    <div className="relative flex mt-8 w-full flex-col items-center justify-center overflow-hidden rounded-lg border 0 py-2 bg-background md:shadow-xl">
-      <Marquee pauseOnHover className="[--duration:20s]">
+    <div className="relative flex mt-8 w-full flex-col items-center justify-center overflow-hidden rounded-lg border 0 py-2 bg-[#f0f4ff] lg:border-none ">
+      <Marquee pauseOnHover className="[--duration:20s] ">
         {firstRow.map((review: Review) => (
           <FeaturedReviewCard key={review._id} {...review} />
         ))}
@@ -86,8 +86,8 @@ export function InfiniteFeaturedReviews() {
           <FeaturedReviewCard key={review._id} {...review} />
         ))}
       </Marquee>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-white dark:from-background"></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-white dark:from-background"></div>
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r  "></div>
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l "></div>
     </div>
   );
 }

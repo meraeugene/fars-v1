@@ -2,8 +2,8 @@ import mongoose, { Schema, Document } from "mongoose";
 
 // Define Reply type for reuse and clarity
 interface Reply {
-  name: string;
   reply: string;
+  name: string;
   createdAt?: Date;
 }
 
@@ -54,7 +54,7 @@ const reviewSchema = new Schema<ReviewDocument>(
     },
     replies: [
       {
-        name: { type: String, required: true, trim: true, maxlength: 100 },
+        name: { type: String, default: "Owner" },
         reply: { type: String, required: true, trim: true, maxlength: 500 },
         createdAt: { type: Date, default: Date.now },
       },

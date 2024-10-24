@@ -11,6 +11,8 @@ import reviewRoutes from "./routes/reviewRoutes";
 import adminRoutes from "./routes/adminRoutes";
 import { notFound, errorHandler } from "./middlewares/errorMiddleware";
 // import job from "./cron/cron";
+import http from "http"; // Import HTTP
+import { Server } from "socket.io"; // Import Socket.IO
 
 const port = process.env.PORT || 5000;
 
@@ -18,6 +20,7 @@ connectDb();
 // job.start();
 
 const app = express();
+const server = http.createServer(app); // Create an HTTP server
 
 // app.use(
 //   cors({
@@ -27,6 +30,7 @@ const app = express();
 //   })
 // );
 
+// Middleware configuration
 app.use(
   cors({
     origin: "http://localhost:5173",
@@ -34,6 +38,15 @@ app.use(
     credentials: true,
   })
 );
+
+// Set up Socket.IO with CORS
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173", // Adjust to your client's origin
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  },
+});
 
 // Body parser middleware
 app.use(express.json());
@@ -61,7 +74,20 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+// Error handling middleware
 app.use(notFound);
 app.use(errorHandler);
 
-app.listen(port, () => console.log(`Server running on port ${port} `));
+// Socket.IO connection handler
+io.on("connection", (socket) => {
+  console.log("A user connected:", socket.id);
+
+  // Handle disconnection
+  socket.on("disconnect", () => {
+    console.log("A user disconnected:", socket.id);
+  });
+});
+
+server.listen(port, () => console.log(`Server running on port ${port} `));
+
+export { io }; // Export io to use in other files like review controller

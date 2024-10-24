@@ -6,6 +6,12 @@ export interface ErrorResponse {
   error?: string;
 }
 
+interface Reply {
+  reply: string;
+  name: string;
+  createdAt?: Date;
+}
+
 export interface Review {
   _id: string;
   feedback: string;
@@ -15,6 +21,7 @@ export interface Review {
   liked: boolean;
   acknowledged: boolean;
   image: string;
+  replies: Reply[]; // Array of Reply objects
 }
 
 export interface RootState {

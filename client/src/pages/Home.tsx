@@ -19,6 +19,9 @@ import DeleteReviewModal from "@/components/DeleteReviewModal";
 import Hero from "@/sections/Hero";
 import FeaturedReviews from "@/sections/FeaturedReviews";
 import Header from "@/components/Header";
+import ReplyReviewModal from "@/components/ReplyReviewModal";
+import FAQ from "@/sections/FAQ";
+import { io, Socket } from "socket.io-client"; // Import Socket.IO
 
 const Home = () => {
   // State to manage the current page number for pagination
@@ -32,6 +35,7 @@ const Home = () => {
     isError,
     isFetching,
     error: reviewsError,
+    refetch,
   } = useGetReviewsQuery({
     pageNumber,
   });
@@ -207,22 +211,83 @@ const Home = () => {
     }
   };
 
+  // REPLY TO REVIEW FEATURE
+  const [replyModal, setReplyModal] = useState<boolean>(false);
+
+  const toggleReplyReviewModal = () => {
+    setReplyModal((prev) => !prev);
+    document.body.classList.remove("menu-open");
+  };
+
+  const handleReplySubmit = (newReply: string) => {
+    const userName = "Owner"; // Replace with the actual user's name from state or context
+
+    // Find the review to update
+    setAllReviews((prevReviews) =>
+      prevReviews.map((review) =>
+        review._id === selectedReviewId
+          ? {
+              ...review,
+              replies: [
+                ...review.replies,
+                {
+                  reply: newReply,
+                  name: userName, // Add the user's name
+                  createdAt: new Date(), // Set createdAt to the current date
+                },
+              ],
+            }
+          : review
+      )
+    );
+  };
+
   // SCROLL SECTION FEATURE
   const featuredReviewsRef = useRef<HTMLDivElement | null>(null);
   const feedbackRef = useRef<HTMLDivElement | null>(null);
   const allReviewsRef = useRef<HTMLDivElement | null>(null);
   const homeRef = useRef<HTMLDivElement | null>(null);
+  const faqRef = useRef<HTMLDivElement | null>(null);
 
   const handleGetStartedClick = () => {
     // Scroll to the feedback form
     feedbackRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  // NOTIFY WHEN NEW REVIEW SUBMITTED
+  const socket = useRef<Socket | null>(null); // Define the type of socket ref
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      // Connect to the server
+      socket.current = io("http://localhost:5000"); // Ensure this matches your server URL
+
+      socket.current.on("connect_error", (err) => {
+        console.error("Connection error:", err);
+      });
+
+      // Listen for new reviews from the server
+      socket.current.on("newReview", () => {
+        toast.success("Someone has added a new review!");
+        refetch();
+      });
+
+      // Clean up the socket connection when the component unmounts
+      return () => {
+        socket.current?.disconnect();
+      };
+    }
+  }, [isLoggedIn]);
+
   return (
     <div>
       <Header />
 
-      <div ref={homeRef} id="hero" className="pt-16">
+      <div
+        ref={homeRef}
+        id="home"
+        className="pt-16 md:pt-20 xl:pt-28 bg-[#f0f4ff]"
+      >
         <Hero onGetStartedClick={handleGetStartedClick} />
       </div>
 
@@ -230,17 +295,21 @@ const Home = () => {
         <FeaturedReviews />
       </div>
 
-      <div ref={feedbackRef} id="feedback" className="pt-16">
+      <div
+        ref={feedbackRef}
+        id="feedback"
+        className="pt-16 bg-[#f0f4ff]  xl:pt-24"
+      >
         <ReviewForm />
       </div>
 
       <div
-        className="reviews__container py-16 px-5"
+        className="reviews__container bg-[#f0f4ff] py-16 pb-0 px-5 md:px-10 lg:px-16 xl:px-60 lg:pt-24 "
         ref={allReviewsRef}
         id="all-reviews"
       >
-        <h1 className="h3-bold text-center">All Reviews</h1>
-        <p className="text-neutral-600 text-center text-sm mb-4 mt-2 max-w-sm dark:text-neutral-300 px-10">
+        <h1 className="h3-bold text-center text-[#0c1b4d]">All Reviews</h1>
+        <p className=" text-center text-sm mb-4 mt-2 max-w-sm dark:text-neutral-300 px-10 mx-auto text-[#777fa1] lg:text-base">
           See what all our customers have to say about their experience!
         </p>
 
@@ -251,15 +320,15 @@ const Home = () => {
             {error?.data?.message || error.error}
           </div>
         ) : allReviews.length > 0 ? (
-          <div className="grid grid-cols-1 gap-8 mt-12">
+          <div className="columns-1 md:columns-2 lg:columns-3 mt-12 gap-x-8 gap-y-4 xl:columns-4 ">
             {allReviews.map((review) => (
               <div
-                className="flex flex-col"
+                className="flex bg-[#fff] flex-col break-inside-avoid mb-8"
                 key={review._id}
                 data-aos="fade-right"
               >
                 {review.image && (
-                  <div className="review-card-image__container  border-blue-500 border rounded-tr-lg rounded-tl-lg border-b-0 ">
+                  <div className="review-card-image__container  border-blue-500 border rounded-tr-lg rounded-tl-lg border-b-0  ">
                     <img
                       src={review.image}
                       alt="image"
@@ -269,7 +338,7 @@ const Home = () => {
                   </div>
                 )}
                 <div
-                  className={` review-card-info__container relative  border-blue-500 p-4 pr-2  border rounded-lg ${
+                  className={` review-card-info__container relative  border-[#4a71ff] p-4  border rounded-lg ${
                     review.image ? "rounded-tr-none rounded-tl-none" : ""
                   }`}
                 >
@@ -321,9 +390,16 @@ const Home = () => {
                     </div>
 
                     {isLoggedIn && (
-                      <div className="flex gap-2 mt-2">
+                      <div className="flex gap-2 mt-2 flex-wrap">
                         {/* Reply Button */}
-                        <button className="border-green-700 border rounded-sm py-1 px-2 text-xs text-green-700 font-medium tracking-wider">
+                        <button
+                          onClick={() => {
+                            setReplyModal(true);
+                            setSelectedReviewId(review._id);
+                            document.body.classList.add("menu-open");
+                          }}
+                          className="border-green-700 border rounded-sm py-1 px-2 text-xs text-green-700 font-medium tracking-wider"
+                        >
                           REPLY
                         </button>
 
@@ -371,6 +447,24 @@ const Home = () => {
                       ACKNOWLEDGED
                     </div>
                   )}
+
+                  {/* OWNER REPLY */}
+                  {review.replies.length > 0 && (
+                    <div className="mt-4">
+                      {review.replies.map((reply, index) => (
+                        <div key={index} className="bg-gray-100 p-2 rounded-md">
+                          <p className="text-sm flex flex-wrap items-center gap-1 text-gray-800 leading-[1.6] font-normal">
+                            {reply.reply}
+                            <span className="text-sm text-gray-800 leading-[1.6] font-semibold">
+                              - {reply.name}
+                            </span>
+                          </p>
+
+                          {/* <p className="text-xs text-gray-500">{reply.name} - {new Date(reply.createdAt).toLocaleString()}</p> */}
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -394,6 +488,21 @@ const Home = () => {
             reviewId={selectedReviewId}
           />
         )}
+
+        {isLoggedIn && replyModal && (
+          <ReplyReviewModal
+            onClose={toggleReplyReviewModal}
+            reviewId={selectedReviewId}
+            reviewerName={
+              allReviews.find((review) => review._id === selectedReviewId)?.name
+            }
+            onReplySubmit={handleReplySubmit}
+          />
+        )}
+      </div>
+
+      <div ref={faqRef} id="FAQs">
+        <FAQ />
       </div>
     </div>
   );

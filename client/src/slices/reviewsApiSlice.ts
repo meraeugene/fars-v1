@@ -46,24 +46,22 @@ export const reviewsApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     addReplyToReview: builder.mutation({
-      query: ({ reviewId, reply }) => ({
+      query: ({ reviewId, reply, name }) => ({
         url: `${REVIEWS_URL}/${reviewId}/reply`,
         method: "POST",
-        body: reply,
+        body: { reply, name },
       }),
     }),
     likeReview: builder.mutation({
       query: ({ reviewId }) => ({
         url: `${REVIEWS_URL}/${reviewId}/like`,
         method: "PUT",
-        params: { reviewId },
       }),
     }),
     dislikeReview: builder.mutation({
       query: ({ reviewId }) => ({
         url: `${REVIEWS_URL}/${reviewId}/unlike`,
         method: "PUT",
-        params: { reviewId },
       }),
     }),
   }),

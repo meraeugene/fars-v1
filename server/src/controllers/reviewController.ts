@@ -1,13 +1,14 @@
 import { Request, Response } from "express";
 import asyncHandler from "../middlewares/asyncHandler";
 import Review from "../models/reviewModel";
+import { io } from "../index";
 
 // @desc Get all reviews with sorting and pagination
 // @route GET /api/reviews
 // @Public access
 const getAllReviews = asyncHandler(async (req: Request, res: Response) => {
   try {
-    const pageSize = 5;
+    const pageSize = 8;
     const page = Number(req.query.pageNumber) || 1;
 
     // Count total reviews for pagination purposes
@@ -79,6 +80,14 @@ const createReview = asyncHandler(async (req, res) => {
 
     // Save the review
     await review.save();
+
+    // Emit socket event to notify admin
+    io.emit("newReview", {
+      name: review.name,
+      rating: review.rating,
+      feedback: review.feedback,
+      image: review.image,
+    });
 
     res.status(201).json({ message: "Review submitted successfully." });
   } catch (error) {
@@ -153,7 +162,7 @@ const acknowledgeReview = asyncHandler(async (req, res) => {
 const replyToReview = asyncHandler(async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, reply } = req.body;
+    const { reply, name } = req.body;
 
     // Find the review by ID
     const review = await Review.findById(id);
@@ -163,7 +172,7 @@ const replyToReview = asyncHandler(async (req, res) => {
     }
 
     // Add a new reply (createdAt will be automatically handled by Mongoose)
-    review.replies.push({ name, reply });
+    review.replies.push({ reply, name });
 
     // Save the updated review
     await review.save();

@@ -17,7 +17,7 @@ body {
 }
 
 .nav-color {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(240, 244, 255, 0.8);
   backdrop-filter: blur(40.7742px);
 }
 
@@ -195,7 +195,7 @@ body.menu-open {
   }
 
   .cta-button {
-    @apply border-blue-500 border p-2 rounded-lg w-full;
+    @apply text-white bg-[#4a71ff] border-[#4a71ff] hover:bg-[#3b5ad1] border px-2 py-3 rounded-lg w-full;
   }
 }
 @layer base {

@@ -69,12 +69,12 @@ const AdminPinModal = ({
 
   return (
     <div
-      className="overlay fixed inset-0 z-10 bg-[rgba(210,210,215,0.35)] backdrop-blur-[4px] transition-all duration-300"
+      className="overlay fixed inset-0 z-10 bg-[rgba(12,27,77,0.15)]  backdrop-blur-[4px] transition-all duration-300"
       onClick={closeAdminPinModal} // Close when clicking outside
     >
       <form
         onSubmit={handleLogin}
-        className="fixed-container z-20 flex-col w-[80%] opacity-100 transition-all duration-300 md:border md:border-r-0 md:border-t-0 md:border-l-[#d2d2d7] rounded-md flex gap-6"
+        className="fixed-container z-20 flex-col w-[80%] opacity-100 transition-all duration-300 md:w-[40%]  rounded-md flex gap-6 lg:w-[30%] xl:w-[20%]"
         onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
       >
         <div className="input__container flex gap-4">
@@ -82,7 +82,7 @@ const AdminPinModal = ({
             <input
               key={index}
               ref={(el) => (inputRefs.current[index] = el!)}
-              type="text"
+              type="password"
               maxLength={1} // Restrict the input to one character
               className="border w-full focus:outline focus:outline-blue-400 focus:outline-1 h-[60px] rounded-lg border-blue-500 p-4 text-center text-2xl" // Center text
               onChange={(e) => handleInputChange(e, index)} // Call the input change handler
@@ -91,7 +91,7 @@ const AdminPinModal = ({
           ))}
         </div>
         <button
-          className="p-3 tracking-widest text-lg border-blue-500 rounded-lg border bg-white"
+          className="p-3 tracking-widest text-lg cta-button"
           onClick={handleLogin} // Call handleLogin on button click
           disabled={isLoading} // Disable while loading
         >

@@ -1,7 +1,9 @@
+import bcrypt from "bcryptjs";
 import { Request, Response } from "express";
 import asyncHandler from "../middlewares/asyncHandler";
 import generateJWTToken from "../utils/generateJWTToken";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import Admin from "../models/adminModel";
 
 // Ensure JWT secret key is defined
 const jwtSecretKey = process.env.JWT_SECRET_KEY;
@@ -11,9 +13,6 @@ if (!jwtSecretKey) {
     "JWT secret key is not defined. Please set the JWT_SECRET_KEY environment variable."
   );
 }
-
-// Admin PIN (hardcoded or loaded from env variables)
-let adminPin = process.env.ADMIN_PIN; // Define your admin PIN in the environment variables
 
 // @desc Validate admin PIN
 // @route POST /api/admin/login
@@ -25,8 +24,15 @@ const adminLogin = asyncHandler(async (req: Request, res: Response) => {
     return res.status(400).json({ message: "PIN is required" }); // Error if PIN is empty
   }
 
-  // Validate the provided PIN
-  if (pin !== adminPin) {
+  const admin = await Admin.findOne();
+
+  if (!admin) {
+    return res.status(500).json({ message: "Admin data not found" });
+  }
+
+  const isMatch = await bcrypt.compare(pin, admin.pin);
+
+  if (!isMatch) {
     return res.status(403).json({
       message: "Invalid PIN. Please check the PIN you entered and try again.",
     });
@@ -62,22 +68,36 @@ const resetAdminPin = asyncHandler(async (req: Request, res: Response) => {
       .json({ message: "New PIN must be at least 4 digits" });
   }
 
+  const admin = await Admin.findOne();
+
+  if (!admin) {
+    return res.status(500).json({ message: "Admin data not found" });
+  }
+
+  // Compare oldPin with hashed PIN
+  const isMatch = await bcrypt.compare(oldPin, admin.pin);
+
   // Validate old PIN match
-  if (oldPin !== adminPin) {
+  if (!isMatch) {
     return res.status(403).json({
       message: "The old PIN you entered is incorrect. Please try again.",
     });
   }
 
-  // Ensure the new PIN is different from the old PIN
-  if (newPin === oldPin) {
+  // Ensure the new PIN is different from the old (plain-text comparison)
+  const newPinIsSame = await bcrypt.compare(newPin, admin.pin);
+  if (newPinIsSame) {
     return res.status(400).json({
       message: "The new PIN must be different from the old PIN.",
     });
   }
 
+  const salt = await bcrypt.genSalt(10);
+  const hashedNewPin = await bcrypt.hash(newPin, salt);
+
   // Reset the PIN
-  adminPin = newPin;
+  admin.pin = hashedNewPin;
+  await admin.save();
 
   return res.status(200).json({
     message: "Admin PIN has been reset successfully",
