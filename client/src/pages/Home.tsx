@@ -323,7 +323,7 @@ const Home = () => {
           <div className="columns-1 md:columns-2 lg:columns-3 mt-12 gap-x-8 gap-y-4 xl:columns-4 ">
             {allReviews.map((review) => (
               <div
-                className="flex bg-[#fff] flex-col break-inside-avoid mb-8  rounded-xl shadow-xl"
+                className="flex bg-[#fff] flex-col break-inside-avoid mb-8 shadow-blue-200  rounded-xl shadow-xl"
                 key={review._id}
                 // data-aos="fade-right"
               >
@@ -398,7 +398,7 @@ const Home = () => {
                             setSelectedReviewId(review._id);
                             document.body.classList.add("menu-open");
                           }}
-                          className="border-green-700 border rounded-sm py-1 px-2 text-xs text-green-700 font-medium tracking-wider"
+                          className="border-green-700 border rounded-sm py-1 px-2 text-xs text-green-700 font-medium tracking-wider hover:bg-green-100 transition-all duration-300"
                         >
                           REPLY
                         </button>
@@ -411,7 +411,7 @@ const Home = () => {
                               !review.acknowledged
                             )
                           }
-                          className={`border-blue-500 font-medium text-blue-600 border rounded-sm py-1 px-2 text-xs tracking-wider ${
+                          className={`border-blue-500 hover:bg-blue-100 transition-all duration-300 font-medium text-blue-600 border rounded-sm py-1 px-2 text-xs tracking-wider ${
                             review.acknowledged ? "bg-blue-100" : ""
                           }`}
                         >
@@ -427,7 +427,7 @@ const Home = () => {
                             setSelectedReviewId(review._id);
                             document.body.classList.add("menu-open");
                           }}
-                          className="border-[#FF3B30] border rounded-sm py-1 px-2 text-xs text-[#ff3b30] font-medium tracking-wider"
+                          className="border-[#FF3B30] border rounded-sm py-1 px-2 text-xs text-[#ff3b30] font-medium tracking-wider hover:bg-red-100 duration-300 transition-all"
                         >
                           DELETE
                         </button>

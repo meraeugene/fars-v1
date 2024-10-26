@@ -64,7 +64,7 @@ const ReplyReviewModal = ({
     "border-red-500 border focus:outline focus:outline-red-200";
 
   return (
-    <div className="overlay fixed inset-0 z-10 bg-[rgba(210,210,215,0.35)] backdrop-blur-[4px] transition-all duration-300">
+    <div className="overlay fixed inset-0 z-10 bg-[rgba(12,27,77,0.15)] backdrop-blur-[4px] transition-all duration-300">
       <div className="fixed-container z-20 flex-col w-[80%] opacity-100 transition-all duration-300 flex gap-6 lg:w-[50%] xl:w-[20%]">
         <Formik
           initialValues={{ reply: "" }}
@@ -80,7 +80,7 @@ const ReplyReviewModal = ({
                   id="reply"
                   rows={5}
                   placeholder={`Replying to ${reviewerName || "this review"}`} // Dynamic placeholder
-                  className={`border border-blue-500 focus:outline-blue-400 focus:outline-2 rounded-lg px-3 py-2 w-full ${
+                  className={`border  border-[#1d3b72]  focus:outline-[#1d3b72]  focus:outline-2 rounded-lg px-3 py-2 w-full ${
                     errors.reply && touched.reply ? errorClass : ""
                   }`}
                   onKeyDown={handleKeyDown} // Attach keydown handler here
@@ -94,14 +94,14 @@ const ReplyReviewModal = ({
               <div className="flex justify-end gap-4 mt-4">
                 <button
                   type="button"
-                  className="cta-button bg-gray-200 text-black hover:bg-gray-400"
+                  className="text-lg rounded-lg mb-4 border border-[#fff] px-4 py-3 bg-[#f4f6fa] text-[#0c1b4d] hover:bg-[#e7e9ea] transition-all duration-300 w-full"
                   onClick={onClose}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="border rounded-lg w-full font-medium tracking-wider px-2 text-sm b bg-blue-500 text-white border-blue-500 hover:bg-blue-600"
+                  className="text-lg rounded-lg  mb-4  border border-white px-4 py-3 bg-[#0c1b4d] text-white hover:bg-[#09123a] transition-all duration-300 hover:border-white w-full"
                   disabled={isSubmitting || loadingReplyToReview} // Disable if submitting or loading
                 >
                   {loadingReplyToReview ? ( // Check if the review is being created

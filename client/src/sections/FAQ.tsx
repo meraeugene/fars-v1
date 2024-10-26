@@ -41,7 +41,7 @@ const FAQ = () => {
               <div key={index} className="border border-gray-300 rounded-lg">
                 <button
                   onClick={() => toggleAccordion(index)}
-                  className="w-full flex justify-between items-center p-4 border shadow-xl border-[#4a71ff] text-left text-base font-medium rounded-md rounded-br-none rounded-bl-none transition-all duration-300 ease-in-out bg-[#fff]"
+                  className="w-full flex justify-between items-center p-4 border shadow-xl border-[#4a71ff]  shadow-blue-100 text-left text-base font-medium rounded-md rounded-br-none rounded-bl-none transition-all duration-300 ease-in-out bg-[#fff]"
                 >
                   {faq.question}
                   <span className="ml-4">
@@ -53,7 +53,7 @@ const FAQ = () => {
                     openIndex === index ? "max-h-screen" : "max-h-0"
                   }`}
                 >
-                  <div className="p-4 border text-base shadow-xl border-[#4a71ff] border-t-0 text-gray-700 bg-white">
+                  <div className="p-4 border text-base shadow-blue-100 shadow-xl border-[#4a71ff] border-t-0 text-gray-700 bg-white">
                     {faq.answer}
                   </div>
                 </div>
@@ -69,7 +69,7 @@ const FAQ = () => {
             height="450"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            className="rounded-lg shadow-xl"
+            className="rounded-lg shadow-xl shadow-blue-200"
           ></iframe>
         </div>
       </div>

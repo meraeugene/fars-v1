@@ -127,7 +127,7 @@ export function ReviewForm() {
                   placeholder="Tyler Durden"
                   type="text"
                   className={`
-                    flex  w-full bg-[#fff] dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-3 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border shadow-xl
+                    flex  w-full bg-[#fff] shadow-blue-100   dark:bg-zinc-800 text-black dark:text-white rounded-md px-3 py-3 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border shadow-xl
                     ${errors.name && touched.name ? errorClass : ""}
                   `}
                 />
@@ -144,7 +144,7 @@ export function ReviewForm() {
                   as="select"
                   name="rating"
                   id="rating"
-                  className={`flex  w-full   shadow-input rounded-md px-3 py-3 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border shadow-xl
+                  className={`flex  w-full  shadow-blue-100 rounded-md px-3 py-3 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border shadow-xl
                     ${errors.rating && touched.rating ? errorClass : ""}`}
                 >
                   <option className="text-black" value="" hidden>
@@ -182,7 +182,7 @@ export function ReviewForm() {
                   placeholder="Share your love! Tell us what you thought about our service in a quick review."
                   name="feedback"
                   className={`
-                    flex h-10 w-full bg-[#fff] dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 shadow-xl py-2 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border
+                    flex h-10 w-full bg-[#fff] dark:bg-zinc-800 text-black dark:text-white  rounded-md px-3 shadow-xl py-2 text-sm focus:outline shadow-blue-100  focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border
                     ${errors.feedback && touched.feedback ? errorClass : ""}`}
                 />
                 <ErrorMessage
@@ -212,7 +212,7 @@ export function ReviewForm() {
 
                 <label
                   htmlFor="image-upload"
-                  className="justify-center gap-2 w-full cursor-pointer text-sm text-gray-500 border border-[#4a71ff] bg-[#fff] flex items-center py-3 px-3 rounded-md text-center hover:bg-blue-50 shadow-xl"
+                  className="justify-center gap-2 w-full cursor-pointer text-sm text-gray-500 border border-[#4a71ff] bg-[#fff] flex items-center py-3 px-3 rounded-md text-center hover:bg-blue-50 shadow-xl shadowb-blue-100  "
                 >
                   <GrFormUpload fontSize={20} />
                   Choose an image
@@ -231,7 +231,7 @@ export function ReviewForm() {
             </div>
 
             <button
-              className="cta-button flex items-center justify-center border h-[45px] rounded-lg w-full  "
+              className="cta-button  flex items-center justify-center border h-[45px] rounded-lg w-full  "
               type="submit"
               disabled={isSubmitting || uploadingImage}
             >
@@ -242,7 +242,7 @@ export function ReviewForm() {
                     size="16"
                     stroke="3"
                     speed="1"
-                    color="#3b82f6"
+                    color="#fff"
                   ></l-line-spinner>
                 </div>
               ) : loadingCreateReview ? ( // Check if the review is being created
@@ -251,7 +251,7 @@ export function ReviewForm() {
                     size="16"
                     stroke="3"
                     speed="1"
-                    color="#3b82f6"
+                    color="#fff"
                   ></l-line-spinner>
                 </div>
               ) : (

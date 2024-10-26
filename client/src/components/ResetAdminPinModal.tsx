@@ -92,7 +92,13 @@ const ResetAdminPinModal = ({
         onClick={(e) => e.stopPropagation()}
       >
         <div>
-          <h3 className="text-lg text-[#0c1b4d] font-bold mb-4 uppercase">
+          <h3
+            className="text-lg text-[#0c1b4d] font-bold mb-4 uppercase"
+            style={{
+              textShadow:
+                "1px 1px 2px #fff, -1px -1px 2px #fff, 1px -1px 2px #fff, -1px 1px 2px #fff",
+            }}
+          >
             Enter Old PIN
           </h3>
           <div className="input__container flex gap-4">
@@ -111,8 +117,14 @@ const ResetAdminPinModal = ({
         </div>
 
         <div>
-          <h3 className="text-lg font-bold text-[#0c1b4d] mb-4 uppercase">
-            Enter New PIN
+          <h3
+            className="text-lg text-[#0c1b4d] font-bold mb-4 uppercase"
+            style={{
+              textShadow:
+                "1px 1px 2px #fff, -1px -1px 2px #fff, 1px -1px 2px #fff, -1px 1px 2px #fff",
+            }}
+          >
+            Enter Old PIN
           </h3>
           <div className="input__container flex gap-4">
             {[...Array(4)].map((_, index) => (
@@ -130,7 +142,7 @@ const ResetAdminPinModal = ({
         </div>
 
         <button
-          className="p-3 tracking-widest cta-button text-lg  transition-all duration-300 ease-in-out "
+          className="text-lg rounded-lg font-bold mb-4 uppercase border border-white px-4 py-3 bg-[#0c1b4d] text-white hover:bg-[#09123a] transition-all duration-300 hover:border-white"
           onClick={handleResetPin}
           disabled={isLoading}
         >
@@ -140,7 +152,7 @@ const ResetAdminPinModal = ({
                 size="16"
                 stroke="3"
                 speed="1"
-                color="#3b82f6"
+                color="#fff"
               ></l-line-spinner>{" "}
             </div>
           ) : (

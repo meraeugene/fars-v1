@@ -18,10 +18,10 @@ const FeaturedReviewCard = ({
   return (
     <figure
       className={cn(
-        "relative w-64 cursor-pointer overflow-hidden rounded-xl bg-[#fff] border border-[#4a71ff] p-4 shadow-xl "
+        "relative w-64 cursor-pointer overflow-hidden rounded-xl bg-[#fff] border border-[#4a71ff] p-4  shadow-xl shadow-blue-100  "
       )}
     >
-      <div className="flex flex-col  gap-2">
+      <div className="flex flex-col  gap-2 ">
         <div className="flex rating__container ">
           {Array.from({ length: 5 }, (_, index) => {
             const starValue = index + 1;

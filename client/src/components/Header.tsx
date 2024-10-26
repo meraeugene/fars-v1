@@ -10,8 +10,8 @@ import {
 import { logout } from "@/slices/authSlice";
 import { ErrorResponse, RootState } from "@/types";
 import { toast } from "react-toastify";
-import AdminPinModal from "./AdminPinModal";
 import ResetAdminPinModal from "./ResetAdminPinModal";
+import LoginAdminPinModal from "./LoginAdminPinModal";
 
 const Header = () => {
   const { adminToken: isLoggedIn } = useSelector(
@@ -112,7 +112,12 @@ const Header = () => {
       <div className=" w-full border-b-[#e0e4f5] border  nav-mobile__container flex items-center justify-between py-2 px-5 md:px-10 lg:px-16 lg:hidden ">
         <div className="logo flex items-center gap-2">
           <MdOutlineLocalLaundryService fontSize={30} color="#2563eb" />
-          <h1 className="font-semibold text-[#0c1b4d]">FARS</h1>
+          <h1
+            className="font-semibold text-[#0c1b4d] cursor-pointer"
+            onClick={() => scrollToSection("home")}
+          >
+            FARS
+          </h1>
         </div>
         <button onClick={toggleNav}>
           <RxHamburgerMenu fontSize={20} />
@@ -122,7 +127,12 @@ const Header = () => {
       <div className=" w-full border-b-[#e0e4f5] border  nav__container  lg:items-center justify-between py-2 px-5 md:px-10 lg:px-16 hidden lg:flex xl:px-60 xl:py-3 ">
         <div className="logo flex items-center gap-2">
           <MdOutlineLocalLaundryService fontSize={30} color="#2563eb" />
-          <h1 className="font-semibold">FARS</h1>
+          <h1
+            className="font-semibold cursor-pointer"
+            onClick={() => scrollToSection("home")}
+          >
+            FARS
+          </h1>
         </div>
 
         <nav>
@@ -235,7 +245,7 @@ const Header = () => {
       )}
 
       {adminPinModal && (
-        <AdminPinModal closeAdminPinModal={toggleAdminPinModal} />
+        <LoginAdminPinModal closeAdminPinModal={toggleAdminPinModal} />
       )}
 
       {resetPinModal && (

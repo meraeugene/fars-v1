@@ -6,7 +6,7 @@ import { Dispatch } from "redux";
 import { setAdminToken } from "@/slices/authSlice";
 import { ErrorResponse } from "@/types";
 
-const AdminPinModal = ({
+const LoginAdminPinModal = ({
   closeAdminPinModal,
 }: {
   closeAdminPinModal: () => void;
@@ -84,14 +84,14 @@ const AdminPinModal = ({
               ref={(el) => (inputRefs.current[index] = el!)}
               type="password"
               maxLength={1} // Restrict the input to one character
-              className="border w-full focus:outline focus:outline-blue-400 focus:outline-1 h-[60px] rounded-lg border-blue-500 p-4 text-center text-2xl" // Center text
+              className="border w-full focus:outline focus:outline-[#1d3b72] focus:outline-1 h-[60px] rounded-lg border-[#1d3b72] p-4 text-center text-2xl" // Center text
               onChange={(e) => handleInputChange(e, index)} // Call the input change handler
               onKeyDown={(e) => handleKeyDown(e, index)} // Call the key down handler for backspace
             />
           ))}
         </div>
         <button
-          className="p-3 tracking-widest text-lg cta-button"
+          className="text-lg rounded-lg font-bold mb-4 uppercase border border-white px-4 py-3 bg-[#0c1b4d] text-white hover:bg-[#09123a] transition-all duration-300 hover:border-white"
           onClick={handleLogin} // Call handleLogin on button click
           disabled={isLoading} // Disable while loading
         >
@@ -101,7 +101,7 @@ const AdminPinModal = ({
                 size="16"
                 stroke="3"
                 speed="1"
-                color="#3b82f6"
+                color="#fff"
               ></l-line-spinner>{" "}
             </div>
           ) : (
@@ -113,4 +113,4 @@ const AdminPinModal = ({
   );
 };
 
-export default AdminPinModal;
+export default LoginAdminPinModal;
