@@ -30,7 +30,7 @@ app.use(
   })
 );
 
-// Middleware configuration
+//Middleware configuration
 // app.use(
 //   cors({
 //     origin: "http://localhost:5173",
