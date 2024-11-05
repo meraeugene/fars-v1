@@ -22,27 +22,35 @@ connectDb();
 const app = express();
 const server = http.createServer(app); // Create an HTTP server
 
-// app.use(
-//   cors({
-//     origin: "",
-//     methods: "GET,POST,PUT,DELETE",
-//     credentials: true,
-//   })
-// );
-
-// Middleware configuration
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://fars-v1.onrender.com/",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
 );
 
+// Middleware configuration
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//     methods: "GET,POST,PUT,DELETE",
+//     credentials: true,
+//   })
+// );
+
 // Set up Socket.IO with CORS
+// const io = new Server(server, {
+//   cors: {
+//     origin: "http://localhost:5173", // Adjust to your client's origin
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
+//   },
+// });
+
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173", // Adjust to your client's origin
+    origin: "https://fars-v1.onrender.com/", // Adjust to your client's origin
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   },
