@@ -24,7 +24,7 @@ const server = http.createServer(app); // Create an HTTP server
 
 app.use(
   cors({
-    origin: "https://fars-v1.onrender.com/",
+    origin: "",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
