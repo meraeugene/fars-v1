@@ -127,7 +127,7 @@ export function ReviewForm() {
                   placeholder="Tyler Durden"
                   type="text"
                   className={`
-                    flex  w-full bg-[#fff] shadow-blue-100   dark:bg-zinc-800 text-black dark:text-white rounded-md px-3 py-3 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border shadow-xl
+                    flex  w-full bg-[#fff] shadow-blue-100   dark:bg-zinc-800 text-black dark:text-white rounded-md px-3 h-[45px] text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border shadow-xl
                     ${errors.name && touched.name ? errorClass : ""}
                   `}
                 />
@@ -144,7 +144,7 @@ export function ReviewForm() {
                   as="select"
                   name="rating"
                   id="rating"
-                  className={`flex  w-full  shadow-blue-100 rounded-md px-3 py-3 text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border shadow-xl
+                  className={`flex  w-full h-[45px] items-center justify-center  shadow-blue-100 rounded-md px-3  text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border shadow-xl
                     ${errors.rating && touched.rating ? errorClass : ""}`}
                 >
                   <option className="text-black" value="" hidden>
