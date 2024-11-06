@@ -30,10 +30,12 @@ const LoginAdminPinModal = ({
       newPin[index] = value;
       setPin(newPin.join(""));
 
-      // Move to next input if possible
+      // Move to next input
       if (index < inputRefs.current.length - 1) {
         inputRefs.current[index + 1].focus();
       }
+    } else {
+      e.target.value = ""; // Clear if it's not a digit
     }
   };
 
@@ -43,11 +45,7 @@ const LoginAdminPinModal = ({
     index: number,
   ) => {
     if (e.key === "Backspace" && !e.currentTarget.value && index > 0) {
-      // Move focus to the previous input if the current input is empty
-      inputRefs.current[index - 1].focus();
-      const newPin = pin.split("");
-      newPin[index - 1] = ""; // Clear the previous input
-      setPin(newPin.join("")); // Update the state
+      inputRefs.current[index - 1].focus(); // Move focus to the previous input
     }
   };
 
@@ -84,14 +82,11 @@ const LoginAdminPinModal = ({
             <input
               key={index}
               ref={(el) => (inputRefs.current[index] = el!)}
-              type="password" // Hide the input value behind asterisks
-              inputMode="numeric" // Suggests that a numeric keyboard should be shown
-              pattern="\d*" // Ensures that only digits can be entered
+              type="number"
               maxLength={1} // Restrict the input to one character
               className="h-[60px] w-full rounded-lg border border-[#1d3b72] p-4 text-center text-2xl focus:outline focus:outline-1 focus:outline-[#1d3b72]" // Center text
-              value={pin[index] || ""} // Bind the value to the pin state
-              onChange={(e) => handleInputChange(e, index)} // Handle input change
-              onKeyDown={(e) => handleKeyDown(e, index)} // Handle backspace for focus shift
+              onChange={(e) => handleInputChange(e, index)} // Call the input change handler
+              onKeyDown={(e) => handleKeyDown(e, index)} // Call the key down handler for backspace
             />
           ))}
         </div>
@@ -119,3 +114,5 @@ const LoginAdminPinModal = ({
 };
 
 export default LoginAdminPinModal;
+
+
