@@ -106,7 +106,7 @@ const ResetAdminPinModal = ({
               <input
                 key={index}
                 ref={(el) => (oldPinRefs.current[index] = el!)}
-                type="password"
+                type="number"
                 maxLength={1}
                 className="h-[60px] w-full rounded-lg border border-blue-500 p-4 text-center text-2xl focus:outline focus:outline-1 focus:outline-blue-400"
                 onChange={(e) => handleInputChange(e, index, true)} // Handle input for old pin
@@ -131,7 +131,7 @@ const ResetAdminPinModal = ({
               <input
                 key={index}
                 ref={(el) => (newPinRefs.current[index] = el!)}
-                type="password"
+                type="number"
                 maxLength={1}
                 className="h-[60px] w-full rounded-lg border border-blue-500 p-4 text-center text-2xl focus:outline focus:outline-1 focus:outline-blue-400"
                 onChange={(e) => handleInputChange(e, index, false)} // Handle input for new pin
