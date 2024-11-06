@@ -30,12 +30,10 @@ const LoginAdminPinModal = ({
       newPin[index] = value;
       setPin(newPin.join(""));
 
-      // Move to next input
+      // Move to next input if possible
       if (index < inputRefs.current.length - 1) {
         inputRefs.current[index + 1].focus();
       }
-    } else {
-      e.target.value = ""; // Clear if it's not a digit
     }
   };
 
@@ -45,7 +43,11 @@ const LoginAdminPinModal = ({
     index: number,
   ) => {
     if (e.key === "Backspace" && !e.currentTarget.value && index > 0) {
-      inputRefs.current[index - 1].focus(); // Move focus to the previous input
+      // Move focus to the previous input if the current input is empty
+      inputRefs.current[index - 1].focus();
+      const newPin = pin.split("");
+      newPin[index - 1] = ""; // Clear the previous input
+      setPin(newPin.join("")); // Update the state
     }
   };
 
