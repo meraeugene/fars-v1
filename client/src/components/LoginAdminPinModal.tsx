@@ -82,11 +82,14 @@ const LoginAdminPinModal = ({
             <input
               key={index}
               ref={(el) => (inputRefs.current[index] = el!)}
-              type="password"
+              type="password" // Hide the input value behind asterisks
+              inputMode="numeric" // Suggests that a numeric keyboard should be shown
+              pattern="\d*" // Ensures that only digits can be entered
               maxLength={1} // Restrict the input to one character
               className="h-[60px] w-full rounded-lg border border-[#1d3b72] p-4 text-center text-2xl focus:outline focus:outline-1 focus:outline-[#1d3b72]" // Center text
-              onChange={(e) => handleInputChange(e, index)} // Call the input change handler
-              onKeyDown={(e) => handleKeyDown(e, index)} // Call the key down handler for backspace
+              value={pin[index] || ""} // Bind the value to the pin state
+              onChange={(e) => handleInputChange(e, index)} // Handle input change
+              onKeyDown={(e) => handleKeyDown(e, index)} // Handle backspace for focus shift
             />
           ))}
         </div>
