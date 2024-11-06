@@ -37,7 +37,7 @@ export function ReviewForm() {
     useUploadSingleImageMutation({});
 
   const handleImageUploadAndPreview = async (
-    e: React.ChangeEvent<HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -68,7 +68,7 @@ export function ReviewForm() {
 
   const handleSubmit = async (
     values: FormValues,
-    { resetForm, setFieldValue }: FormikHelpers<FormValues>
+    { resetForm, setFieldValue }: FormikHelpers<FormValues>,
   ) => {
     const data = {
       ...values,
@@ -97,11 +97,11 @@ export function ReviewForm() {
     "border-red-500 border focus:outline focus:outline-red-200";
 
   return (
-    <div className="max-w-md w-full  mx-auto rounded-none md:rounded-2xl px-5 ">
-      <h2 className="font-bold h3-bold text-center text-[#0c1b4d]">
+    <div className="mx-auto w-full max-w-md rounded-none px-5 md:rounded-2xl">
+      <h2 className="h3-bold text-center font-bold text-[#0c1b4d]">
         Your Feedback
       </h2>
-      <p className="text-[#777fa1] lg:text-base text-center text-sm max-w-sm mt-2">
+      <p className="mt-2 max-w-sm text-center text-sm text-[#777fa1] lg:text-base">
         We value your feedback! Help us improve our service by sharing your
         thoughts.
       </p>
@@ -118,7 +118,7 @@ export function ReviewForm() {
       >
         {({ isSubmitting, setFieldValue, errors, touched }) => (
           <Form className="mt-10">
-            <div className="flex flex-col space-y-4 md:space-y-4  mb-6 md:mb-8">
+            <div className="mb-6 flex flex-col space-y-4 md:mb-8 md:space-y-4">
               <label htmlFor="name" className="flex flex-col gap-2">
                 Name
                 <Field
@@ -126,15 +126,12 @@ export function ReviewForm() {
                   name="name"
                   placeholder="Tyler Durden"
                   type="text"
-                  className={`
-                    flex  w-full bg-[#fff] shadow-blue-100   dark:bg-zinc-800 text-black dark:text-white rounded-md px-3 h-[45px] text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border shadow-xl
-                    ${errors.name && touched.name ? errorClass : ""}
-                  `}
+                  className={`flex h-[45px] w-full rounded-md border border-[#4a71ff] bg-[#fff] px-3 text-sm text-black shadow-xl shadow-blue-100 focus:outline focus:outline-2 focus:outline-blue-400 dark:bg-zinc-800 dark:text-white ${errors.name && touched.name ? errorClass : ""} `}
                 />
                 <ErrorMessage
                   name="name"
                   component="div"
-                  className="text-red-500 text-sm"
+                  className="text-sm text-red-500"
                 />
               </label>
 
@@ -144,8 +141,7 @@ export function ReviewForm() {
                   as="select"
                   name="rating"
                   id="rating"
-                  className={`flex  w-full h-[45px] items-center justify-center  shadow-blue-100 rounded-md px-3  text-sm focus:outline focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border shadow-xl
-                    ${errors.rating && touched.rating ? errorClass : ""}`}
+                  className={`flex h-[45px] w-full items-center justify-center rounded-md border border-[#4a71ff] bg-[#fff] px-3 text-sm shadow-xl shadow-blue-100 focus:outline focus:outline-2 focus:outline-blue-400 ${errors.rating && touched.rating ? errorClass : ""}`}
                 >
                   <option className="text-black" value="" hidden>
                     Select Rating
@@ -169,7 +165,7 @@ export function ReviewForm() {
                 <ErrorMessage
                   name="rating"
                   component="div"
-                  className="text-red-500 text-sm"
+                  className="text-sm text-red-500"
                 />
               </label>
 
@@ -181,14 +177,12 @@ export function ReviewForm() {
                   rows={5}
                   placeholder="Share your love! Tell us what you thought about our service in a quick review."
                   name="feedback"
-                  className={`
-                    flex h-10 w-full bg-[#fff] dark:bg-zinc-800 text-black dark:text-white  rounded-md px-3 shadow-xl py-2 text-sm focus:outline shadow-blue-100  focus:outline-blue-400 focus:outline-2 border-[#4a71ff] border
-                    ${errors.feedback && touched.feedback ? errorClass : ""}`}
+                  className={`flex h-10 w-full rounded-md border border-[#4a71ff] bg-[#fff] px-3 py-2 text-sm text-black shadow-xl shadow-blue-100 focus:outline focus:outline-2 focus:outline-blue-400 dark:bg-zinc-800 dark:text-white ${errors.feedback && touched.feedback ? errorClass : ""}`}
                 />
                 <ErrorMessage
                   name="feedback"
                   component="div"
-                  className="text-red-500 text-sm"
+                  className="text-sm text-red-500"
                 />
               </label>
 
@@ -196,7 +190,7 @@ export function ReviewForm() {
               <label className="flex flex-col gap-2">
                 <div className="flex items-center gap-2">
                   Image{" "}
-                  <span className=" text-neutral-600 text-xs ">(optional)</span>
+                  <span className="text-xs text-neutral-600">(optional)</span>
                 </div>
 
                 <input
@@ -212,7 +206,7 @@ export function ReviewForm() {
 
                 <label
                   htmlFor="image-upload"
-                  className="justify-center gap-2 w-full cursor-pointer text-sm text-gray-500 border border-[#4a71ff] bg-[#fff] flex items-center py-3 px-3 rounded-md text-center hover:bg-blue-50 shadow-xl shadowb-blue-100  "
+                  className="shadowb-blue-100 flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-[#4a71ff] bg-[#fff] px-3 py-3 text-center text-sm text-gray-500 shadow-xl hover:bg-blue-50"
                 >
                   <GrFormUpload fontSize={20} />
                   Choose an image
@@ -223,7 +217,7 @@ export function ReviewForm() {
                     <img
                       src={imagePreview}
                       alt="Image Preview"
-                      className="w-full h-auto rounded-md shadow-lg"
+                      className="h-auto w-full rounded-md shadow-lg"
                     />
                   </div>
                 )}
@@ -231,12 +225,12 @@ export function ReviewForm() {
             </div>
 
             <button
-              className="cta-button  flex items-center justify-center border h-[45px] rounded-lg w-full  "
+              className="cta-button flex h-[45px] w-full items-center justify-center rounded-lg border"
               type="submit"
               disabled={isSubmitting || uploadingImage}
             >
               {uploadingImage ? ( // Check if the image is uploading
-                <div className="flex  items-center justify-center gap-3">
+                <div className="flex items-center justify-center gap-3">
                   <span className="text-sm">Uploading Image</span>
                   <l-line-spinner
                     size="16"
@@ -246,7 +240,7 @@ export function ReviewForm() {
                   ></l-line-spinner>
                 </div>
               ) : loadingCreateReview ? ( // Check if the review is being created
-                <div className="flex  items-center justify-center gap-3">
+                <div className="flex items-center justify-center gap-3">
                   <l-line-spinner
                     size="16"
                     stroke="3"

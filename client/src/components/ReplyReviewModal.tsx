@@ -55,7 +55,7 @@ const ReplyReviewModal = ({
       (e.target as HTMLFormElement)
         .closest("form")
         ?.dispatchEvent(
-          new Event("submit", { cancelable: true, bubbles: true })
+          new Event("submit", { cancelable: true, bubbles: true }),
         );
     }
   };
@@ -65,7 +65,7 @@ const ReplyReviewModal = ({
 
   return (
     <div className="overlay fixed inset-0 z-10 bg-[rgba(12,27,77,0.15)] backdrop-blur-[4px] transition-all duration-300">
-      <div className="fixed-container z-20 flex-col w-[80%] opacity-100 transition-all duration-300 flex gap-6 lg:w-[50%] xl:w-[20%]">
+      <div className="fixed-container z-20 flex w-[80%] flex-col gap-6 opacity-100 transition-all duration-300 lg:w-[50%] xl:w-[20%]">
         <Formik
           initialValues={{ reply: "" }}
           validationSchema={validationSchema}
@@ -80,7 +80,7 @@ const ReplyReviewModal = ({
                   id="reply"
                   rows={5}
                   placeholder={`Replying to ${reviewerName || "this review"}`} // Dynamic placeholder
-                  className={`border  border-[#1d3b72]  focus:outline-[#1d3b72]  focus:outline-2 rounded-lg px-3 py-2 w-full ${
+                  className={`w-full rounded-lg border border-[#1d3b72] px-3 py-2 focus:outline-2 focus:outline-[#1d3b72] ${
                     errors.reply && touched.reply ? errorClass : ""
                   }`}
                   onKeyDown={handleKeyDown} // Attach keydown handler here
@@ -88,20 +88,20 @@ const ReplyReviewModal = ({
                 <ErrorMessage
                   name="reply"
                   component="div"
-                  className="text-red-500 text-base"
+                  className="text-base text-red-500"
                 />
               </div>
-              <div className="flex justify-end gap-4 mt-4">
+              <div className="mt-4 flex justify-end gap-4">
                 <button
                   type="button"
-                  className="text-lg rounded-lg mb-4 border border-[#fff] px-4 py-3 bg-[#f4f6fa] text-[#0c1b4d] hover:bg-[#e7e9ea] transition-all duration-300 w-full"
+                  className="mb-4 w-full rounded-lg border border-[#fff] bg-[#f4f6fa] px-4 py-3 text-lg text-[#0c1b4d] transition-all duration-300 hover:bg-[#e7e9ea]"
                   onClick={onClose}
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="text-lg rounded-lg  mb-4  border border-white px-4 py-3 bg-[#0c1b4d] text-white hover:bg-[#09123a] transition-all duration-300 hover:border-white w-full"
+                  className="mb-4 w-full rounded-lg border border-white bg-[#0c1b4d] px-4 py-3 text-lg text-white transition-all duration-300 hover:border-white hover:bg-[#09123a]"
                   disabled={isSubmitting || loadingReplyToReview} // Disable if submitting or loading
                 >
                   {loadingReplyToReview ? ( // Check if the review is being created

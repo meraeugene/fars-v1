@@ -1,6 +1,6 @@
 const LazyLoader = () => {
   return (
-    <div className={`flex h-screen mt-8 w-full items-center justify-center`}>
+    <div className={`mt-8 flex h-screen w-full items-center justify-center`}>
       <l-line-spinner
         size="30"
         stroke="3"

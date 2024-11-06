@@ -61,7 +61,7 @@ const AllReviews = ({
   useEffect(() => {
     if (reviews.length > 0) {
       const likedReviews = JSON.parse(
-        localStorage.getItem("likedReviews") || "[]"
+        localStorage.getItem("likedReviews") || "[]",
       );
 
       setAllReviews((prevReviews) => {
@@ -88,7 +88,7 @@ const AllReviews = ({
   // Function to handle like action
   const handleLike = async (reviewId: string) => {
     const likedReviews = JSON.parse(
-      localStorage.getItem("likedReviews") || "[]"
+      localStorage.getItem("likedReviews") || "[]",
     );
 
     // Check if the review has already been liked
@@ -103,7 +103,7 @@ const AllReviews = ({
       // Add the review to local storage after a successful like
       localStorage.setItem(
         "likedReviews",
-        JSON.stringify([...likedReviews, reviewId])
+        JSON.stringify([...likedReviews, reviewId]),
       );
 
       // Update the local state to reflect the like
@@ -111,8 +111,8 @@ const AllReviews = ({
         prevReviews.map((review) =>
           review._id === reviewId
             ? { ...review, likes: review.likes + 1, liked: true }
-            : review
-        )
+            : review,
+        ),
       );
     } catch (error) {
       const errorMessage =
@@ -127,12 +127,12 @@ const AllReviews = ({
   // Function to handle dislike action
   const handleDislike = async (reviewId: string) => {
     const likedReviews = JSON.parse(
-      localStorage.getItem("likedReviews") || "[]"
+      localStorage.getItem("likedReviews") || "[]",
     );
 
     // Remove the review ID from local storage if it was disliked
     const updatedLikedReviews = likedReviews.filter(
-      (id: string) => id !== reviewId
+      (id: string) => id !== reviewId,
     );
     localStorage.setItem("likedReviews", JSON.stringify(updatedLikedReviews));
 
@@ -144,8 +144,8 @@ const AllReviews = ({
         prevReviews.map((review) =>
           review._id === reviewId
             ? { ...review, likes: Math.max(0, review.likes - 1), liked: false }
-            : review
-        )
+            : review,
+        ),
       );
     } catch (error) {
       const errorMessage =
@@ -172,7 +172,7 @@ const AllReviews = ({
     try {
       const response = await deleteReview(reviewId).unwrap(); // Perform the delete operation
       setAllReviews((prevReviews) =>
-        prevReviews.filter((review) => review._id !== reviewId)
+        prevReviews.filter((review) => review._id !== reviewId),
       ); // Update local state
       toast.success(response.message);
     } catch (error) {
@@ -190,7 +190,7 @@ const AllReviews = ({
 
   const handleAcknowledgeReview = async (
     reviewId: string,
-    acknowledge: boolean
+    acknowledge: boolean,
   ) => {
     try {
       await acknowledgeReview({
@@ -203,8 +203,8 @@ const AllReviews = ({
         prevReviews.map((review) =>
           review._id === reviewId
             ? { ...review, acknowledged: acknowledge }
-            : review
-        )
+            : review,
+        ),
       );
     } catch (error) {
       const errorMessage =
@@ -242,48 +242,48 @@ const AllReviews = ({
                 },
               ],
             }
-          : review
-      )
+          : review,
+      ),
     );
   };
 
   return (
-    <div className="reviews__container bg-[#f0f4ff] py-20 pb-0 px-5 md:px-10 lg:px-16 xl:px-60 lg:pt-24 ">
+    <div className="reviews__container bg-[#f0f4ff] px-5 py-20 pb-0 md:px-10 lg:px-16 lg:pt-24 xl:px-60">
       <h1 className="h3-bold text-center text-[#0c1b4d]">All Reviews</h1>
-      <p className=" text-center text-sm mb-4 mt-2 max-w-sm dark:text-neutral-300 px-10 mx-auto text-[#777fa1] lg:text-base">
+      <p className="mx-auto mb-4 mt-2 max-w-sm px-10 text-center text-sm text-[#777fa1] dark:text-neutral-300 lg:text-base">
         See what all our customers have to say about their experience!
       </p>
 
       {isLoading ? (
         <Loader />
       ) : isError ? (
-        <div className="text-center mt-8 border border-red-500 rounded-lg p-2">
+        <div className="mt-8 rounded-lg border border-red-500 p-2 text-center">
           {error?.data?.message || error.error}
         </div>
       ) : allReviews.length > 0 ? (
-        <div className="columns-1 md:columns-2 lg:columns-3 mt-12 gap-x-8 gap-y-4 xl:columns-4 ">
+        <div className="mt-12 columns-1 gap-x-8 gap-y-4 md:columns-2 lg:columns-3 xl:columns-4">
           {allReviews.map((review) => (
             <div
-              className="flex bg-[#fff] flex-col break-inside-avoid mb-8 shadow-blue-200  rounded-xl shadow-xl"
+              className="mb-8 flex break-inside-avoid flex-col rounded-xl bg-[#fff] shadow-xl shadow-blue-200"
               key={review._id}
-              // data-aos="fade-right"
+              data-aos="fade-right"
             >
               {review.image && (
-                <div className="review-card-image__container    ">
+                <div className="review-card-image__container">
                   <img
                     src={review.image}
                     alt="image"
-                    className="rounded-tr-xl rounded-tl-xl object-cover"
+                    className="rounded-tl-xl rounded-tr-xl object-cover"
                     loading="lazy"
                   />
                 </div>
               )}
               <div
-                className={` review-card-info__container relative   p-4   ${
-                  review.image ? "rounded-tr-none rounded-tl-none" : ""
+                className={`review-card-info__container relative p-4 ${
+                  review.image ? "rounded-tl-none rounded-tr-none" : ""
                 }`}
               >
-                <div className="flex rating__container mb-2">
+                <div className="rating__container mb-2 flex">
                   {Array.from({ length: 5 }, (_, index) => {
                     const starValue = index + 1;
                     return (
@@ -299,12 +299,12 @@ const AllReviews = ({
                     );
                   })}
                 </div>
-                <div className="flex flex-col gap-3 mt-5 ">
-                  <p className="text-sm   text-neutral-600 leading-[1.6] font-normal">
+                <div className="mt-5 flex flex-col gap-3">
+                  <p className="text-sm font-normal leading-[1.6] text-neutral-600">
                     {review.feedback}
                   </p>
 
-                  <p className="text-sm  text-neutral-600  leading-[1.6] font-semibold">
+                  <p className="text-sm font-semibold leading-[1.6] text-neutral-600">
                     - {review.name}
                   </p>
 
@@ -331,7 +331,7 @@ const AllReviews = ({
                   </div>
 
                   {isLoggedIn && (
-                    <div className="flex gap-2 mt-2 flex-wrap">
+                    <div className="mt-2 flex flex-wrap gap-2">
                       {/* Reply Button */}
                       <button
                         onClick={() => {
@@ -339,7 +339,7 @@ const AllReviews = ({
                           setSelectedReviewId(review._id);
                           document.body.classList.add("menu-open");
                         }}
-                        className="border-green-700 border rounded-sm py-1 px-2 text-xs text-green-700 font-medium tracking-wider hover:bg-green-100 transition-all duration-300"
+                        className="rounded-sm border border-green-700 px-2 py-1 text-xs font-medium tracking-wider text-green-700 transition-all duration-300 hover:bg-green-100"
                       >
                         REPLY
                       </button>
@@ -349,10 +349,10 @@ const AllReviews = ({
                         onClick={() =>
                           handleAcknowledgeReview(
                             review._id,
-                            !review.acknowledged
+                            !review.acknowledged,
                           )
                         }
-                        className={`border-blue-500 hover:bg-blue-100 transition-all duration-300 font-medium text-blue-600 border rounded-sm py-1 px-2 text-xs tracking-wider ${
+                        className={`rounded-sm border border-blue-500 px-2 py-1 text-xs font-medium tracking-wider text-blue-600 transition-all duration-300 hover:bg-blue-100 ${
                           review.acknowledged ? "bg-blue-100" : ""
                         }`}
                       >
@@ -366,7 +366,7 @@ const AllReviews = ({
                           setSelectedReviewId(review._id);
                           document.body.classList.add("menu-open");
                         }}
-                        className="border-[#FF3B30] border rounded-sm py-1 px-2 text-xs text-[#ff3b30] font-medium tracking-wider hover:bg-red-100 duration-300 transition-all"
+                        className="rounded-sm border border-[#FF3B30] px-2 py-1 text-xs font-medium tracking-wider text-[#ff3b30] transition-all duration-300 hover:bg-red-100"
                       >
                         DELETE
                       </button>
@@ -381,7 +381,7 @@ const AllReviews = ({
                     data-aos-anchor="#example-anchor"
                     data-aos-offset="500"
                     data-aos-duration="500"
-                    className="absolute py-1 top-[12px] right-0 bg-blue-500 px-2 text-white rounded-tl-md rounded-bl-md font-medium tracking-widest text-sm"
+                    className="absolute right-0 top-[12px] rounded-bl-md rounded-tl-md bg-blue-500 px-2 py-1 text-sm font-medium tracking-widest text-white"
                   >
                     ACKNOWLEDGED
                   </div>
@@ -391,10 +391,10 @@ const AllReviews = ({
                 {review.replies.length > 0 && (
                   <div className="mt-4">
                     {review.replies.map((reply, index) => (
-                      <div key={index} className="bg-blue-50 p-2 rounded-md">
-                        <p className="text-sm flex flex-wrap items-center gap-1 text-gray-800 leading-[1.6] font-normal ">
+                      <div key={index} className="rounded-md bg-blue-50 p-2">
+                        <p className="flex flex-wrap items-center gap-1 text-sm font-normal leading-[1.6] text-gray-800">
                           {reply.reply}
-                          <span className="text-sm text-gray-800 leading-[1.6] font-semibold">
+                          <span className="text-sm font-semibold leading-[1.6] text-gray-800">
                             - {reply.name}
                           </span>
                         </p>
@@ -409,7 +409,7 @@ const AllReviews = ({
           ))}
         </div>
       ) : (
-        <h1 className="text-center mt-8 border border-blue-500 rounded-lg p-2">
+        <h1 className="mt-8 rounded-lg border border-blue-500 p-2 text-center">
           No Reviews Available
         </h1>
       )}

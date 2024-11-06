@@ -13,7 +13,7 @@ import { useGetReviewsQuery } from "@/slices/reviewsApiSlice";
 
 const Home = () => {
   const { adminToken: isLoggedIn } = useSelector(
-    (state: RootState) => state.auth
+    (state: RootState) => state.auth,
   );
 
   // State to manage the current page number for pagination
@@ -76,7 +76,7 @@ const Home = () => {
       <div
         ref={homeRef}
         id="home"
-        className="pt-20 xl:pt-28 bg-[#f0f4ff] border-b"
+        className="border-b bg-[#f0f4ff] pt-20 xl:pt-28"
       >
         <Hero onGetStartedClick={handleGetStartedClick} />
       </div>
@@ -84,7 +84,7 @@ const Home = () => {
       <div
         ref={feedbackRef}
         id="feedback"
-        className="pt-20 bg-[#f0f4ff]  xl:pt-24"
+        className="bg-[#f0f4ff] pt-20 xl:pt-24"
       >
         <ReviewForm />
       </div>

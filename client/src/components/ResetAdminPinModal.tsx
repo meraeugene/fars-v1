@@ -27,7 +27,7 @@ const ResetAdminPinModal = ({
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     index: number,
-    isOldPin: boolean
+    isOldPin: boolean,
   ) => {
     const value = e.target.value;
 
@@ -50,7 +50,7 @@ const ResetAdminPinModal = ({
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
     index: number,
-    isOldPin: boolean
+    isOldPin: boolean,
   ) => {
     if (e.key === "Backspace" && !e.currentTarget.value && index > 0) {
       (isOldPin ? oldPinRefs : newPinRefs).current[index - 1].focus();
@@ -83,17 +83,17 @@ const ResetAdminPinModal = ({
 
   return (
     <div
-      className="overlay fixed inset-0 z-10  backdrop-blur-[4px] transition-all duration-300 bg-[rgba(12,27,77,0.15)] "
+      className="overlay fixed inset-0 z-10 bg-[rgba(12,27,77,0.15)] backdrop-blur-[4px] transition-all duration-300"
       onClick={closeResetPinModal}
     >
       <form
         onSubmit={handleResetPin}
-        className="fixed-container z-20 flex-col w-[80%] opacity-100 transition-all duration-300  lg:w-[30%] xl:w-[20%] rounded-md flex gap-6"
+        className="fixed-container z-20 flex w-[80%] flex-col gap-6 rounded-md opacity-100 transition-all duration-300 lg:w-[30%] xl:w-[20%]"
         onClick={(e) => e.stopPropagation()}
       >
         <div>
           <h3
-            className="text-lg text-[#0c1b4d] font-bold mb-4 uppercase"
+            className="mb-4 text-lg font-bold uppercase text-[#0c1b4d]"
             style={{
               textShadow:
                 "1px 1px 2px #fff, -1px -1px 2px #fff, 1px -1px 2px #fff, -1px 1px 2px #fff",
@@ -108,7 +108,7 @@ const ResetAdminPinModal = ({
                 ref={(el) => (oldPinRefs.current[index] = el!)}
                 type="password"
                 maxLength={1}
-                className="border w-full focus:outline focus:outline-blue-400 focus:outline-1 h-[60px] rounded-lg border-blue-500 p-4 text-center text-2xl"
+                className="h-[60px] w-full rounded-lg border border-blue-500 p-4 text-center text-2xl focus:outline focus:outline-1 focus:outline-blue-400"
                 onChange={(e) => handleInputChange(e, index, true)} // Handle input for old pin
                 onKeyDown={(e) => handleKeyDown(e, index, true)}
               />
@@ -118,7 +118,7 @@ const ResetAdminPinModal = ({
 
         <div>
           <h3
-            className="text-lg text-[#0c1b4d] font-bold mb-4 uppercase"
+            className="mb-4 text-lg font-bold uppercase text-[#0c1b4d]"
             style={{
               textShadow:
                 "1px 1px 2px #fff, -1px -1px 2px #fff, 1px -1px 2px #fff, -1px 1px 2px #fff",
@@ -133,7 +133,7 @@ const ResetAdminPinModal = ({
                 ref={(el) => (newPinRefs.current[index] = el!)}
                 type="password"
                 maxLength={1}
-                className="border w-full focus:outline focus:outline-blue-400 focus:outline-1 h-[60px] rounded-lg border-blue-500 p-4 text-center text-2xl"
+                className="h-[60px] w-full rounded-lg border border-blue-500 p-4 text-center text-2xl focus:outline focus:outline-1 focus:outline-blue-400"
                 onChange={(e) => handleInputChange(e, index, false)} // Handle input for new pin
                 onKeyDown={(e) => handleKeyDown(e, index, false)}
               />
@@ -142,12 +142,12 @@ const ResetAdminPinModal = ({
         </div>
 
         <button
-          className="text-lg rounded-lg font-bold mb-4 uppercase border border-white px-4 py-3 bg-[#0c1b4d] text-white hover:bg-[#09123a] transition-all duration-300 hover:border-white"
+          className="borderborder mb-4 rounded-lg border-white bg-[#0c1b4d] px-4 py-3 text-lg font-bold uppercase text-white transition-all duration-300 hover:border-white hover:bg-[#09123a]"
           onClick={handleResetPin}
           disabled={isLoading}
         >
           {isLoading ? (
-            <div className="flex p-2 items-center justify-center gap-3">
+            <div className="flex items-center justify-center gap-3 p-2">
               <l-line-spinner
                 size="16"
                 stroke="3"

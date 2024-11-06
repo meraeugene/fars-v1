@@ -4,10 +4,10 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="p-4 bg-[#f0f4ff] border-t flex items-center flex-col gap-2">
+    <footer className="flex flex-col items-center gap-2 border-t bg-[#f0f4ff] p-4">
       <div className="logo flex items-center justify-center gap-2">
         <MdOutlineLocalLaundryService fontSize={24} color="#2563eb" />
-        <h1 className="text-[#0c1b4d] font-semibold">FARS</h1>
+        <h1 className="font-semibold text-[#0c1b4d]">FARS</h1>
       </div>
 
       {/* Copyright */}

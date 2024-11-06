@@ -30,18 +30,18 @@ const FAQ = () => {
   };
 
   return (
-    <div className="w-full bg-[#f0f4ff] mx-auto  p-4 pb-24 md:px-10 lg:px-16 xl:px-60 pt-20">
-      <div className="flex flex-col lg:flex-row md:gap-16 lg:gap-14 gap-10 ">
+    <div className="mx-auto w-full bg-[#f0f4ff] p-4 pb-24 pt-20 md:px-10 lg:px-16 xl:px-60">
+      <div className="flex flex-col gap-10 md:gap-16 lg:flex-row lg:gap-14">
         <div className="faqs__container basis-1/2">
-          <h2 className="text-2xl text-[#0c1b4d] font-bold mb-8 text-center">
+          <h2 className="mb-8 text-center text-2xl font-bold text-[#0c1b4d]">
             Frequently Asked Questions
           </h2>
           <div className="space-y-4">
             {faqs.map((faq, index) => (
-              <div key={index} className="border border-gray-300 rounded-lg">
+              <div key={index} className="rounded-lg border border-gray-300">
                 <button
                   onClick={() => toggleAccordion(index)}
-                  className="w-full flex justify-between items-center p-4 border shadow-xl border-[#4a71ff]  shadow-blue-100 text-left text-base font-medium rounded-md rounded-br-none rounded-bl-none transition-all duration-300 ease-in-out bg-[#fff]"
+                  className="flex w-full items-center justify-between rounded-md rounded-bl-none rounded-br-none border border-[#4a71ff] bg-[#fff] p-4 text-left text-base font-medium shadow-xl shadow-blue-100 transition-all duration-300 ease-in-out"
                 >
                   {faq.question}
                   <span className="ml-4">
@@ -49,11 +49,11 @@ const FAQ = () => {
                   </span>
                 </button>
                 <div
-                  className={`transition-[max-height] duration-200 ease-in-out overflow-hidden ${
+                  className={`overflow-hidden transition-[max-height] duration-200 ease-in-out ${
                     openIndex === index ? "max-h-screen" : "max-h-0"
                   }`}
                 >
-                  <div className="p-4 border text-base shadow-blue-100 shadow-xl border-[#4a71ff] border-t-0 text-gray-700 bg-white">
+                  <div className="border border-t-0 border-[#4a71ff] bg-white p-4 text-base text-gray-700 shadow-xl shadow-blue-100">
                     {faq.answer}
                   </div>
                 </div>

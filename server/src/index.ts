@@ -22,14 +22,6 @@ connectDb();
 const app = express();
 const server = http.createServer(app); // Create an HTTP server
 
-app.use(
-  cors({
-    origin: "",
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-  })
-);
-
 //Middleware configuration
 // app.use(
 //   cors({
@@ -38,6 +30,14 @@ app.use(
 //     credentials: true,
 //   })
 // );
+
+app.use(
+  cors({
+    origin: "",
+    methods: "GET,POST,PUT,DELETE",
+    credentials: true,
+  })
+);
 
 // Set up Socket.IO with CORS
 // const io = new Server(server, {

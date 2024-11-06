@@ -18,11 +18,11 @@ const FeaturedReviewCard = ({
   return (
     <figure
       className={cn(
-        "relative w-64 cursor-pointer overflow-hidden rounded-xl bg-[#fff] border border-[#4a71ff] p-4  shadow-xl shadow-blue-100  "
+        "relative w-64 cursor-pointer overflow-hidden rounded-xl border border-[#4a71ff] bg-[#fff] p-4 shadow-xl shadow-blue-100",
       )}
     >
-      <div className="flex flex-col  gap-2 ">
-        <div className="flex rating__container ">
+      <div className="flex flex-col gap-2">
+        <div className="rating__container flex">
           {Array.from({ length: 5 }, (_, index) => {
             const starValue = index + 1;
             return (
@@ -41,7 +41,7 @@ const FeaturedReviewCard = ({
 
         <blockquote className="text-sm">{feedback}</blockquote>
       </div>
-      <figcaption className="mt-4  text-sm font-medium text-[#0c1b4d]">
+      <figcaption className="mt-4 text-sm font-medium text-[#0c1b4d]">
         {name}
       </figcaption>
     </figure>
@@ -68,15 +68,15 @@ export function InfiniteFeaturedReviews() {
 
   if (errorFeaturedReviews) {
     return (
-      <div className="text-center mt-8 border mx-4 border-red-500 rounded-lg p-2">
+      <div className="mx-4 mt-8 rounded-lg border border-red-500 p-2 text-center">
         {error?.data?.message || error.error}
       </div>
     );
   }
 
   return (
-    <div className="relative flex mt-8 w-full flex-col items-center justify-center overflow-hidden rounded-lg border 0 py-2 bg-[#f0f4ff] lg:border-none ">
-      <Marquee pauseOnHover className="[--duration:20s] ">
+    <div className="0 relative mt-8 flex w-full flex-col items-center justify-center overflow-hidden rounded-lg border bg-[#f0f4ff] py-2 lg:border-none">
+      <Marquee pauseOnHover className="[--duration:20s]">
         {firstRow.map((review: Review) => (
           <FeaturedReviewCard key={review._id} {...review} />
         ))}
@@ -86,8 +86,8 @@ export function InfiniteFeaturedReviews() {
           <FeaturedReviewCard key={review._id} {...review} />
         ))}
       </Marquee>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r  "></div>
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l "></div>
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r"></div>
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l"></div>
     </div>
   );
 }

@@ -15,7 +15,7 @@ import LoginAdminPinModal from "./LoginAdminPinModal";
 
 const Header = () => {
   const { adminToken: isLoggedIn } = useSelector(
-    (state: RootState) => state.auth
+    (state: RootState) => state.auth,
   );
 
   const [mobileNav, setMobileNav] = useState<boolean>(false);
@@ -108,27 +108,27 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed w-full top-0 z-30 bg-[#f0f4ff]">
-      <div className=" w-full border-b-[#e0e4f5] border  nav-mobile__container flex items-center justify-between py-2 px-5 md:px-10 lg:px-16 lg:hidden ">
+    <header className="fixed top-0 z-30 w-full bg-[#f0f4ff]">
+      <div className="nav-mobile__container flex w-full items-center justify-between border border-b-[#e0e4f5] px-5 py-2 md:px-10 lg:hidden lg:px-16">
         <div className="logo flex items-center gap-2">
           <MdOutlineLocalLaundryService fontSize={30} color="#2563eb" />
           <h1
-            className="font-semibold text-[#0c1b4d] cursor-pointer"
+            className="cursor-pointer font-semibold text-[#0c1b4d]"
             onClick={() => scrollToSection("home")}
           >
             FARS
           </h1>
         </div>
         <button onClick={toggleNav}>
-          <RxHamburgerMenu fontSize={20} />
+          <RxHamburgerMenu fontSize={24} />
         </button>
       </div>
 
-      <div className=" w-full border-b-[#e0e4f5] border  nav__container  lg:items-center justify-between py-2 px-5 md:px-10 lg:px-16 hidden lg:flex xl:px-60 xl:py-3 ">
+      <div className="nav__container hidden w-full justify-between border border-b-[#e0e4f5] px-5 py-2 md:px-10 lg:flex lg:items-center lg:px-16 xl:px-60 xl:py-3">
         <div className="logo flex items-center gap-2">
           <MdOutlineLocalLaundryService fontSize={30} color="#2563eb" />
           <h1
-            className="font-semibold cursor-pointer"
+            className="cursor-pointer font-semibold"
             onClick={() => scrollToSection("home")}
           >
             FARS
@@ -136,7 +136,7 @@ const Header = () => {
         </div>
 
         <nav>
-          <ul className=" flex  gap-6 ">
+          <ul className="flex gap-6">
             {[
               "home",
               "feedback",
@@ -147,9 +147,9 @@ const Header = () => {
               <li
                 key={sectionId}
                 onClick={() => scrollToSection(sectionId)}
-                className={`text-base cursor-pointer hover:text-[#0c1b4d] capitalize transition-all duration-300 ease-in-out  ${
+                className={`cursor-pointer text-base capitalize transition-all duration-300 ease-in-out hover:text-[#0c1b4d] ${
                   activeSection === sectionId
-                    ? "text-[#0c1b4d] font-semibold"
+                    ? "font-semibold text-[#0c1b4d]"
                     : ""
                 }`}
               >
@@ -185,16 +185,16 @@ const Header = () => {
       </div>
 
       {mobileNav && (
-        <div className=" mobile-nav slide-in-right nav-color fixed right-0 top-0 z-[50]     h-screen w-[60%] md:w-1/3 lg:hidden">
-          <div className="relative p-10  px-8">
+        <div className="mobile-nav slide-in-right nav-color fixed right-0 top-0 z-[50] h-screen w-[60%] md:w-1/3 lg:hidden">
+          <div className="relative p-10 px-8">
             <button
               onClick={toggleNav}
-              className="absolute right-[13px] top-[12px] md:right-[37px]"
+              className="absolute right-[18px] top-[12px] md:right-[37px]"
             >
-              <IoCloseOutline fontSize={25} />
+              <IoCloseOutline fontSize={28} />
             </button>
             <nav>
-              <ul className="mt-10 flex flex-col gap-6 ">
+              <ul className="mt-10 flex flex-col gap-6">
                 {[
                   "home",
                   "feedback",
@@ -205,9 +205,9 @@ const Header = () => {
                   <li
                     key={sectionId}
                     onClick={() => scrollToSection(sectionId)}
-                    className={`text-base cursor-pointer capitalize transition-all duration-300 ease-in-out ${
+                    className={`cursor-pointer text-base capitalize transition-all duration-300 ease-in-out ${
                       activeSection === sectionId
-                        ? "text-[#0c1b4d] font-semibold"
+                        ? "font-semibold text-[#0c1b4d]"
                         : ""
                     }`}
                   >
@@ -216,7 +216,7 @@ const Header = () => {
                 ))}
                 {!isLoggedIn && (
                   <li
-                    className=" text-lg cursor-pointer transition-all duration-300 ease-in-out"
+                    className="cursor-pointer text-base transition-all duration-300 ease-in-out"
                     onClick={toggleAdminPinModal}
                   >
                     Login as Owner
@@ -226,12 +226,12 @@ const Header = () => {
                   <>
                     <li
                       onClick={toggleResetPinModal}
-                      className=" text-base  cursor-pointer transition-all duration-300 ease-in-out"
+                      className="cursor-pointer text-base transition-all duration-300 ease-in-out"
                     >
                       Reset Admin PIN
                     </li>
                     <li
-                      className=" text-base  cursor-pointer transition-all duration-300 ease-in-out"
+                      className="cursor-pointer text-base transition-all duration-300 ease-in-out"
                       onClick={logoutHandler}
                     >
                       Logout

@@ -20,7 +20,7 @@ const LoginAdminPinModal = ({
   // Function to handle input change and move focus
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) => {
     const value = e.target.value;
 
@@ -42,7 +42,7 @@ const LoginAdminPinModal = ({
   // Function to handle key down (backspace to move focus backward)
   const handleKeyDown = (
     e: React.KeyboardEvent<HTMLInputElement>,
-    index: number
+    index: number,
   ) => {
     if (e.key === "Backspace" && !e.currentTarget.value && index > 0) {
       inputRefs.current[index - 1].focus(); // Move focus to the previous input
@@ -69,12 +69,12 @@ const LoginAdminPinModal = ({
 
   return (
     <div
-      className="overlay fixed inset-0 z-10 bg-[rgba(12,27,77,0.15)]  backdrop-blur-[4px] transition-all duration-300"
+      className="overlay fixed inset-0 z-10 bg-[rgba(12,27,77,0.15)] backdrop-blur-[4px] transition-all duration-300"
       onClick={closeAdminPinModal} // Close when clicking outside
     >
       <form
         onSubmit={handleLogin}
-        className="fixed-container z-20 flex-col w-[80%] opacity-100 transition-all duration-300 md:w-[40%]  rounded-md flex gap-6 lg:w-[30%] xl:w-[20%]"
+        className="fixed-container z-20 flex w-[80%] flex-col gap-6 rounded-md opacity-100 transition-all duration-300 md:w-[40%] lg:w-[30%] xl:w-[20%]"
         onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
       >
         <div className="input__container flex gap-4">
@@ -84,19 +84,19 @@ const LoginAdminPinModal = ({
               ref={(el) => (inputRefs.current[index] = el!)}
               type="password"
               maxLength={1} // Restrict the input to one character
-              className="border w-full focus:outline focus:outline-[#1d3b72] focus:outline-1 h-[60px] rounded-lg border-[#1d3b72] p-4 text-center text-2xl" // Center text
+              className="h-[60px] w-full rounded-lg border border-[#1d3b72] p-4 text-center text-2xl focus:outline focus:outline-1 focus:outline-[#1d3b72]" // Center text
               onChange={(e) => handleInputChange(e, index)} // Call the input change handler
               onKeyDown={(e) => handleKeyDown(e, index)} // Call the key down handler for backspace
             />
           ))}
         </div>
         <button
-          className="text-lg rounded-lg font-bold mb-4 uppercase border border-white px-4 py-3 bg-[#0c1b4d] text-white hover:bg-[#09123a] transition-all duration-300 hover:border-white"
+          className="mb-4 rounded-lg border border-white bg-[#0c1b4d] px-4 py-3 text-lg font-bold uppercase text-white transition-all duration-300 hover:border-white hover:bg-[#09123a]"
           onClick={handleLogin} // Call handleLogin on button click
           disabled={isLoading} // Disable while loading
         >
           {isLoading ? (
-            <div className="flex p-2 items-center justify-center gap-3">
+            <div className="flex items-center justify-center gap-3 p-2">
               <l-line-spinner
                 size="16"
                 stroke="3"
