@@ -248,7 +248,7 @@ const AllReviews = ({
   };
 
   return (
-    <div className="reviews__container bg-[#f0f4ff] px-5 py-20 pb-0 md:px-10 lg:px-16 lg:pt-24 xl:px-60">
+    <div className="reviews__container bg-[#f0f4ff] px-5 py-20 pb-0 md:px-10 lg:px-16 lg:pt-24 xl:px-40">
       <h1 className="h3-bold text-center text-[#0c1b4d]">All Reviews</h1>
       <p className="mx-auto mb-4 mt-2 max-w-sm px-10 text-center text-sm text-[#777fa1] dark:text-neutral-300 lg:text-base">
         See what all our customers have to say about their experience!

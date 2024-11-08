@@ -30,7 +30,7 @@ const FAQ = () => {
   };
 
   return (
-    <div className="mx-auto w-full bg-[#f0f4ff] p-4 pb-24 pt-20 md:px-10 lg:px-16 xl:px-60">
+    <div className="mx-auto w-full bg-[#f0f4ff] p-4 pb-24 pt-20 md:px-10 lg:px-16 xl:px-40">
       <div className="flex flex-col gap-10 md:gap-16 lg:flex-row lg:gap-14">
         <div className="faqs__container basis-1/2">
           <h2 className="mb-8 text-center text-2xl font-bold text-[#0c1b4d]">
