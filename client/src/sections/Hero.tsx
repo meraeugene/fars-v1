@@ -22,7 +22,10 @@ const Hero = ({ onGetStartedClick }: { onGetStartedClick: () => void }) => {
         <img
           src="/hero.webp"
           alt="laundry"
-          loading="lazy"
+          // loading="lazy"
+          width={450}
+          height={450}
+          fetchPriority="high"
           className="h-full w-full rounded-lg object-cover lg:w-[80%]"
         />
       </div>
