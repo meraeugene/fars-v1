@@ -65,7 +65,7 @@ const ReplyReviewModal = ({
 
   return (
     <div className="overlay fixed inset-0 z-10 bg-[rgba(12,27,77,0.15)] backdrop-blur-[4px] transition-all duration-300">
-      <div className="fixed-container z-20 flex w-[80%] flex-col gap-6 opacity-100 transition-all duration-300 lg:w-[50%] xl:w-[20%]">
+      <div className="fixed-container z-20 flex w-[80%] flex-col gap-6 opacity-100 transition-all duration-300 lg:w-[50%] xl:w-[25%]">
         <Formik
           initialValues={{ reply: "" }}
           validationSchema={validationSchema}

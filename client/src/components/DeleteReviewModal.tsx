@@ -15,7 +15,7 @@ const DeleteReviewModal = ({
 
   return (
     <div className="overlay fixed inset-0 z-10 bg-[rgba(12,27,77,0.15)] backdrop-blur-[4px] transition-all duration-300">
-      <div className="fixed-container z-20 flex w-[80%] flex-col gap-6 rounded-lg border border-blue-900 bg-white p-4 opacity-100 transition-all duration-300 md:w-[40%] lg:w-[30%] xl:w-[15%]">
+      <div className="fixed-container z-20 flex w-[80%] flex-col gap-6 rounded-lg border border-blue-900 bg-white p-4 opacity-100 transition-all duration-300 md:w-[40%] lg:w-[30%] xl:w-[20%]">
         <h1 className="lg:text-base">
           Are you sure you want to delete this review?
         </h1>
