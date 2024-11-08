@@ -82,14 +82,14 @@ const Header = () => {
     }
   };
 
-  // LOGOUT IF TOKEN IS EXPIRED
-  const validateTokenQuery = useVerifyTokenQuery({});
+  // LOGOUT IF TOKEN IS EXPIRED (only if a user is logged in)
+  const validateTokenQuery = isLoggedIn ? useVerifyTokenQuery({}) : null;
 
   useEffect(() => {
-    if (validateTokenQuery.isError) {
+    if (isLoggedIn && validateTokenQuery?.isError) {
       dispatch(logout());
     }
-  }, [dispatch, validateTokenQuery.isError]);
+  }, [dispatch, isLoggedIn, validateTokenQuery?.isError]);
 
   // SCROLL TO SECTIONS
 
