@@ -53,7 +53,7 @@ const FAQ = () => {
                     openIndex === index ? "max-h-screen" : "max-h-0"
                   }`}
                 >
-                  <div className="border border-t-0 border-[#4a71ff] bg-white p-4 text-base text-gray-700 shadow-xl shadow-blue-100">
+                  <div className="border border-t-0 border-[#4a71ff] bg-white p-4 text-base text-[#333f61] shadow-xl shadow-blue-100">
                     {faq.answer}
                   </div>
                 </div>
@@ -66,6 +66,7 @@ const FAQ = () => {
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3945.986903753061!2d124.62956767568821!3d8.500651597034143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32fff305166a30d1%3A0x6b28f050efb47d4d!2sZerca%20Laundry%20Lounge!5e0!3m2!1sen!2sph!4v1729676019941!5m2!1sen!2sph"
             width="100%"
+            title="zerca-map"
             height="450"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

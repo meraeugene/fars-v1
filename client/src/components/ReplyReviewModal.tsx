@@ -101,6 +101,7 @@ const ReplyReviewModal = ({
                 </button>
                 <button
                   type="submit"
+                  aria-label="reply-review"
                   className="mb-4 w-full rounded-lg border border-white bg-[#0c1b4d] px-4 py-3 text-lg text-white transition-all duration-300 hover:border-white hover:bg-[#09123a]"
                   disabled={isSubmitting || loadingReplyToReview} // Disable if submitting or loading
                 >

@@ -94,6 +94,7 @@ const LoginAdminPinModal = ({
           className="mb-4 rounded-lg border border-white bg-[#0c1b4d] px-4 py-3 text-lg font-bold uppercase text-white transition-all duration-300 hover:border-white hover:bg-[#09123a]"
           onClick={handleLogin} // Call handleLogin on button click
           disabled={isLoading} // Disable while loading
+          aria-label="login-admin"
         >
           {isLoading ? (
             <div className="flex items-center justify-center gap-3 p-2">

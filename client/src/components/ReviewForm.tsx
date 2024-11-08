@@ -101,7 +101,7 @@ export function ReviewForm() {
       <h2 className="h3-bold text-center font-bold text-[#0c1b4d]">
         Your Feedback
       </h2>
-      <p className="mt-2 max-w-sm text-center text-sm text-[#777fa1] lg:text-base">
+      <p className="mt-2 max-w-sm text-center text-sm text-[#333f61] lg:text-base">
         We value your feedback! Help us improve our service by sharing your
         thoughts.
       </p>
@@ -227,6 +227,7 @@ export function ReviewForm() {
             <button
               className="cta-button flex h-[45px] w-full items-center justify-center rounded-lg border"
               type="submit"
+              aria-label="submit-review"
               disabled={isSubmitting || uploadingImage}
             >
               {uploadingImage ? ( // Check if the image is uploading

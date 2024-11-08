@@ -145,6 +145,7 @@ const ResetAdminPinModal = ({
           className="borderborder mb-4 rounded-lg border-white bg-[#0c1b4d] px-4 py-3 text-lg font-bold uppercase text-white transition-all duration-300 hover:border-white hover:bg-[#09123a]"
           onClick={handleResetPin}
           disabled={isLoading}
+          aria-label="reset-admin-pin"
         >
           {isLoading ? (
             <div className="flex items-center justify-center gap-3 p-2">
