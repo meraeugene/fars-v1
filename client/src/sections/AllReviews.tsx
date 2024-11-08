@@ -263,7 +263,7 @@ const AllReviews = ({
       ) : allReviews.length > 0 ? (
         <div className="mt-12 columns-1 gap-x-8 gap-y-4 md:columns-2 lg:columns-3 xl:columns-4">
           {allReviews.map((review) => (
-            <div
+            <section
               className="mb-8 flex break-inside-avoid flex-col rounded-xl bg-[#fff] shadow-xl shadow-blue-200"
               key={review._id}
               data-aos="fade-right"
@@ -323,7 +323,7 @@ const AllReviews = ({
                         style={{ cursor: "pointer" }}
                       />
                     )}
-                    <h3 className="text-sm text-slate-600">LIKE?</h3>
+                    <h4 className="text-sm text-slate-600">LIKE?</h4>
 
                     <span className="text-sm font-medium text-blue-600">
                       {formatNumber(review.likes)}
@@ -405,13 +405,13 @@ const AllReviews = ({
                   </div>
                 )}
               </div>
-            </div>
+            </section>
           ))}
         </div>
       ) : (
-        <h1 className="mt-8 rounded-lg border border-blue-500 p-2 text-center">
+        <h2 className="mt-8 rounded-lg border border-blue-500 p-2 text-center">
           No Reviews Available
-        </h1>
+        </h2>
       )}
 
       <LoadMore

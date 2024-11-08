@@ -142,7 +142,7 @@ const ResetAdminPinModal = ({
         </div>
 
         <button
-          className="borderborder mb-4 rounded-lg border-white bg-[#0c1b4d] px-4 py-3 text-lg font-bold uppercase text-white transition-all duration-300 hover:border-white hover:bg-[#09123a]"
+          className="cta-button"
           onClick={handleResetPin}
           disabled={isLoading}
           aria-label="reset-admin-pin"

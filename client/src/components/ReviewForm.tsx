@@ -225,14 +225,15 @@ export function ReviewForm() {
             </div>
 
             <button
-              className="cta-button flex h-[45px] w-full items-center justify-center rounded-lg border"
+              className="cta-button"
               type="submit"
               aria-label="submit-review"
               disabled={isSubmitting || uploadingImage}
             >
-              {uploadingImage ? ( // Check if the image is uploading
+              {uploadingImage ? (
+                // Check if the image is uploading
                 <div className="flex items-center justify-center gap-3">
-                  <span className="text-sm">Uploading Image</span>
+                  <span className="text-sm text-white">Uploading Image</span>
                   <l-line-spinner
                     size="16"
                     stroke="3"
@@ -240,7 +241,8 @@ export function ReviewForm() {
                     color="#fff"
                   ></l-line-spinner>
                 </div>
-              ) : loadingCreateReview ? ( // Check if the review is being created
+              ) : loadingCreateReview ? (
+                // Check if the review is being created
                 <div className="flex items-center justify-center gap-3">
                   <l-line-spinner
                     size="16"

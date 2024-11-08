@@ -33,7 +33,7 @@ body {
 
 .title {
   text-wrap: nowrap;
-  @apply max-h-[40px] max-w-[300px] overflow-hidden text-ellipsis  md:max-w-[450px];
+  @apply max-h-[40px] max-w-[300px] overflow-hidden text-ellipsis md:max-w-[450px];
 }
 
 body.menu-open {
@@ -75,71 +75,71 @@ body.menu-open {
 /* ========================================== TAILWIND STYLES */
 @layer utilities {
   .wrapper {
-    @apply max-w-7xl lg:mx-auto px-5 py-8 md:px-10 xl:px-0 w-full;
+    @apply w-full max-w-7xl px-5 py-8 md:px-10 lg:mx-auto xl:px-0;
   }
 
   .cta-button {
-    @apply text-white bg-[#4a71ff] border-[#4a71ff] hover:bg-[#3b5ad1] border px-2 py-3 rounded-lg w-full;
+    @apply flex h-[45px] w-full items-center justify-center rounded-lg border border-[#4a71ff] bg-blue-600 px-2 py-3 text-white hover:bg-blue-700;
   }
 
   .flex-center {
-    @apply flex justify-center items-center;
+    @apply flex items-center justify-center;
   }
 
   .flex-between {
-    @apply flex justify-between items-center;
+    @apply flex items-center justify-between;
   }
 
   /* TYPOGRAPHY */
   /* 64 */
   .h1-bold {
-    @apply font-bold text-[40px] leading-[48px] lg:text-[48px] lg:leading-[60px]  xl:text-[58px] xl:leading-[74px];
+    @apply text-[40px] font-bold leading-[48px] lg:text-[48px] lg:leading-[60px] xl:text-[58px] xl:leading-[74px];
   }
 
   /* 40 */
   .h2-bold {
-    @apply font-bold text-[32px] leading-[40px] lg:text-[36px] lg:leading-[44px] xl:text-[40px] xl:leading-[48px];
+    @apply text-[32px] font-bold leading-[40px] lg:text-[36px] lg:leading-[44px] xl:text-[40px] xl:leading-[48px];
   }
 
   .h2-medium {
-    @apply font-medium text-[32px] leading-[40px] lg:text-[36px] lg:leading-[44px] xl:text-[40px] xl:leading-[48px];
+    @apply text-[32px] font-medium leading-[40px] lg:text-[36px] lg:leading-[44px] xl:text-[40px] xl:leading-[48px];
   }
 
   /* 36 */
   .h3-bold {
-    @apply font-bold text-[28px] leading-[36px] md:text-[36px] md:leading-[44px];
+    @apply text-[28px] font-bold leading-[36px] md:text-[36px] md:leading-[44px];
   }
 
   .h3-medium {
-    @apply font-medium text-[28px] leading-[36px] md:text-[36px] md:leading-[44px];
+    @apply text-[28px] font-medium leading-[36px] md:text-[36px] md:leading-[44px];
   }
 
   /* 32 */
   .h4-medium {
-    @apply font-medium text-[32px] leading-[40px];
+    @apply text-[32px] font-medium leading-[40px];
   }
 
   /* 28 */
   .h5-bold {
-    @apply font-bold text-[28px] leading-[36px];
+    @apply text-[28px] font-bold leading-[36px];
   }
 
   /* 24 */
   .p-bold-24 {
-    @apply font-bold text-[24px] leading-[36px];
+    @apply text-[24px] font-bold leading-[36px];
   }
 
   .p-medium-24 {
-    @apply font-medium text-[24px] leading-[36px];
+    @apply text-[24px] font-medium leading-[36px];
   }
 
   .p-regular-24 {
-    @apply font-normal text-[24px] leading-[36px];
+    @apply text-[24px] font-normal leading-[36px];
   }
 
   /* 20 */
   .p-bold-20 {
-    @apply font-bold text-[20px] leading-[30px] tracking-[2%];
+    @apply text-[20px] font-bold leading-[30px] tracking-[2%];
   }
 
   .p-semibold-20 {
@@ -209,19 +209,27 @@ body.menu-open {
     overflow: hidden;
     cursor: pointer;
     background-color: #4973ff;
-    transition: box-shadow 0.4s ease, background-color 0.4s ease,
+    transition:
+      box-shadow 0.4s ease,
+      background-color 0.4s ease,
       color 0.4s ease;
-    box-shadow: 0 0 2px 0 rgba(73, 115, 255, 0.1),
-      0 0 4px 0 rgba(73, 115, 255, 0.2), 0 0 6px 0 rgba(73, 115, 255, 0.3),
-      0 0 8px 0 rgba(73, 115, 255, 0.4), 0 0 12px 0 rgba(73, 115, 255, 0.5),
+    box-shadow:
+      0 0 2px 0 rgba(73, 115, 255, 0.1),
+      0 0 4px 0 rgba(73, 115, 255, 0.2),
+      0 0 6px 0 rgba(73, 115, 255, 0.3),
+      0 0 8px 0 rgba(73, 115, 255, 0.4),
+      0 0 12px 0 rgba(73, 115, 255, 0.5),
       0 0 18px 0 rgba(73, 115, 255, 0.6);
   }
 
   .box:hover {
     background-color: #3454b4; /* Darker blue on hover */
-    box-shadow: 0 0 2px 0 rgba(52, 84, 180, 0.1),
-      0 0 4px 0 rgba(52, 84, 180, 0.2), 0 0 6px 0 rgba(52, 84, 180, 0.3),
-      0 0 8px 0 rgba(52, 84, 180, 0.4), 0 0 12px 0 rgba(52, 84, 180, 0.5),
+    box-shadow:
+      0 0 2px 0 rgba(52, 84, 180, 0.1),
+      0 0 4px 0 rgba(52, 84, 180, 0.2),
+      0 0 6px 0 rgba(52, 84, 180, 0.3),
+      0 0 8px 0 rgba(52, 84, 180, 0.4),
+      0 0 12px 0 rgba(52, 84, 180, 0.5),
       0 0 18px 0 rgba(52, 84, 180, 0.6);
   }
 
@@ -240,7 +248,9 @@ body.menu-open {
     height: 200px;
     background-color: inherit;
     box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
-    transition: transform 0.4s linear, top 1s linear;
+    transition:
+      transform 0.4s linear,
+      top 1s linear;
     overflow: hidden;
   }
 

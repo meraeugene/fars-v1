@@ -119,7 +119,7 @@ const Header = () => {
             FARS
           </h1>
         </div>
-        <button onClick={toggleNav}>
+        <button aria-label="nav-menu-icon" onClick={toggleNav}>
           <RxHamburgerMenu fontSize={24} />
         </button>
       </div>
@@ -189,6 +189,7 @@ const Header = () => {
           <div className="relative p-10 px-8">
             <button
               onClick={toggleNav}
+              aria-label="close-icon"
               className="absolute right-[18px] top-[12px] md:right-[37px]"
             >
               <IoCloseOutline fontSize={28} />
