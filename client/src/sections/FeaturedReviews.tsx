@@ -8,7 +8,7 @@ const FeaturedReviews = () => {
         Hear what our customers are saying about our service!
       </p>
 
-      <div className="lg:mx-16 xl:mx-60">
+      <div className="lg:mx-16 xl:mx-40">
         <InfiniteFeaturedReviews />
       </div>
     </div>

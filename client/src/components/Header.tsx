@@ -124,7 +124,7 @@ const Header = () => {
         </button>
       </div>
 
-      <div className="nav__container hidden w-full justify-between border border-b-[#e0e4f5] px-5 py-2 md:px-10 lg:flex lg:items-center lg:px-16 xl:px-60 xl:py-3">
+      <div className="nav__container hidden w-full justify-between border border-b-[#e0e4f5] px-5 py-2 md:px-10 lg:flex lg:items-center lg:px-16 xl:px-40 xl:py-3">
         <div className="logo flex items-center gap-2">
           <MdOutlineLocalLaundryService fontSize={30} color="#2563eb" />
           <h1
