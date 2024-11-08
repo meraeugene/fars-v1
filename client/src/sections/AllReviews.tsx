@@ -323,7 +323,7 @@ const AllReviews = ({
                         style={{ cursor: "pointer" }}
                       />
                     )}
-                    <h4 className="text-sm text-slate-600">LIKE?</h4>
+                    <h2 className="text-sm text-slate-600">LIKE?</h2>
 
                     <span className="text-sm font-medium text-blue-600">
                       {formatNumber(review.likes)}
