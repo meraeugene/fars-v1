@@ -25,7 +25,6 @@ const Hero = ({ onGetStartedClick }: { onGetStartedClick: () => void }) => {
           // loading="lazy"
           width={450}
           height={450}
-          fetchPriority="high"
           className="h-full w-full rounded-lg object-cover lg:w-[80%]"
         />
       </div>

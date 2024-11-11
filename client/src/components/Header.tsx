@@ -83,7 +83,7 @@ const Header = () => {
   };
 
   // LOGOUT IF TOKEN IS EXPIRED (only if a user is logged in)
-  const validateTokenQuery = isLoggedIn ? useVerifyTokenQuery({}) : null;
+  const validateTokenQuery = useVerifyTokenQuery({});
 
   useEffect(() => {
     if (isLoggedIn && validateTokenQuery?.isError) {
