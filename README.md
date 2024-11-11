@@ -20,3 +20,4 @@
 - All Reviews with infinite loading feature
 - Admin can login through 4 digit pin code
 - Admin can reset pin code
+- Real Time Notification for admin if a user added a review
