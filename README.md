@@ -15,7 +15,7 @@
 > ## Features
 
 - Make a feedback with star ratings and image
-- Admin can reply, delete, acknoledge each reviews
+- Admin can reply, delete, acknowledge each reviews
 - Featured Reviews
 - All Reviews with infinite loading feature
 - Admin can login through 4 digit pin code
