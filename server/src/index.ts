@@ -10,14 +10,14 @@ import uploadImageRoutes from "./routes/uploadImageRoutes";
 import reviewRoutes from "./routes/reviewRoutes";
 import adminRoutes from "./routes/adminRoutes";
 import { notFound, errorHandler } from "./middlewares/errorMiddleware";
-// import job from "./cron/cron";
+import job from "./utils/cron";
 import http from "http"; // Import HTTP
 import { Server } from "socket.io"; // Import Socket.IO
 
 const port = process.env.PORT || 5000;
 
 connectDb();
-// job.start();
+job.start();
 
 const app = express();
 const server = http.createServer(app); // Create an HTTP server
