@@ -25,7 +25,7 @@ const NotificationTab = () => {
       <div className="flex items-center justify-between border-b p-4 pb-2">
         <h2 className="text-lg font-semibold">Notifications</h2>
         <button
-          className="rounded-sm bg-gray-200 px-2 py-1 text-xs"
+          className="rounded-sm bg-red-500 px-2 py-1 text-xs text-red-50"
           onClick={() => dispatch(clearNotifications())}
         >
           🗑 Clear all
@@ -41,8 +41,14 @@ const NotificationTab = () => {
               >
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-500">
-                    {new Date(notification.createdAt).toLocaleString()}
+                    {new Date(notification.createdAt).toLocaleDateString()}{" "}
+                    {new Date(notification.createdAt).toLocaleTimeString([], {
+                      hour: "numeric",
+                      minute: "2-digit",
+                      hour12: true,
+                    })}
                   </span>
+
                   {index === 0 && (
                     <span className="rounded-full bg-blue-500 px-3 py-1 text-xs text-white">
                       Newest
@@ -53,7 +59,7 @@ const NotificationTab = () => {
                   {capitalizeFirstLetter(notification.name)}
                 </span>
                 <span className="mt-1 text-gray-700">
-                  - {truncateText(notification.feedback, 25)}
+                  - {truncateText(notification.feedback, 30)}
                 </span>
               </li>
             ))}
