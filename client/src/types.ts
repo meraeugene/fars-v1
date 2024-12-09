@@ -1,3 +1,5 @@
+import { Notification } from "./slices/notificationsSlice";
+
 export interface ErrorResponse {
   data?: {
     error?: string;
@@ -28,4 +30,5 @@ export interface RootState {
   auth: {
     adminToken: string;
   };
+  notifications: Notification[];
 }

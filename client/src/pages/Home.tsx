@@ -10,6 +10,8 @@ import FAQ from "@/sections/FAQ";
 import { io, Socket } from "socket.io-client"; // Import Socket.IO
 import AllReviews from "@/sections/AllReviews";
 import { useGetReviewsQuery } from "@/slices/reviewsApiSlice";
+import { useDispatch } from "react-redux";
+import { addNotification } from "@/slices/notificationsSlice";
 
 const Home = () => {
   const { adminToken: isLoggedIn } = useSelector(
@@ -45,6 +47,7 @@ const Home = () => {
 
   // NOTIFY WHEN NEW REVIEW SUBMITTED
   const socket = useRef<Socket | null>(null); // Define the type of socket ref
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -57,8 +60,15 @@ const Home = () => {
       });
 
       // Listen for new reviews from the server
-      socket.current.on("newReview", () => {
-        toast.success("Someone has added a new review!");
+      socket.current.on("newReview", (review) => {
+        dispatch(
+          addNotification({
+            name: review.name,
+            createdAt: review.createdAt,
+            feedback: review.feedback,
+          }),
+        );
+        toast.success(`${review.name} has added a review !`);
         refetch();
       });
 

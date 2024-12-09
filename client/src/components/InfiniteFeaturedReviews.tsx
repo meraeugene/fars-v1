@@ -39,7 +39,7 @@ const FeaturedReviewCard = ({
           })}
         </div>
 
-        <blockquote className="text-sm">{feedback}</blockquote>
+        <blockquote className="break-words text-sm">{feedback}</blockquote>
       </div>
       <figcaption className="mt-4 text-sm font-medium text-[#0c1b4d]">
         {name}

@@ -87,6 +87,7 @@ const createReview = asyncHandler(async (req, res) => {
       rating: review.rating,
       feedback: review.feedback,
       image: review.image,
+      createdAt: review.createdAt,
     });
 
     res.status(201).json({ message: "Review submitted successfully." });

@@ -12,6 +12,7 @@ import { ErrorResponse, RootState } from "@/types";
 import { toast } from "react-toastify";
 import ResetAdminPinModal from "./ResetAdminPinModal";
 import LoginAdminPinModal from "./LoginAdminPinModal";
+import NotificationTab from "./NotificationTab";
 
 const Header = () => {
   const { adminToken: isLoggedIn } = useSelector(
@@ -107,6 +108,11 @@ const Header = () => {
     }
   };
 
+  const [showNotifications, setShowNotifications] = useState(false);
+
+  // Notifications
+  const notifications = useSelector((state: RootState) => state.notifications);
+
   return (
     <header className="fixed top-0 z-30 w-full bg-[#f0f4ff]">
       <div className="nav-mobile__container flex w-full items-center justify-between border border-b-[#e0e4f5] px-5 py-2 md:px-10 lg:hidden lg:px-16">
@@ -138,11 +144,11 @@ const Header = () => {
         <nav>
           <ul className="flex gap-6">
             {[
-              "home",
+              // "home",
               "feedback",
               "featured-reviews",
               "all-reviews",
-              "FAQs",
+              // "FAQs",
             ].map((sectionId) => (
               <li
                 key={sectionId}
@@ -166,6 +172,21 @@ const Header = () => {
             )}
             {isLoggedIn && (
               <>
+                <li className="relative flex cursor-pointer items-center gap-2 text-base transition-all duration-300 ease-in-out">
+                  <span onClick={() => setShowNotifications((prev) => !prev)}>
+                    🛎️ Notifications
+                  </span>
+
+                  {notifications.length > 0 && (
+                    <span
+                      onClick={() => setShowNotifications((prev) => !prev)}
+                      className="flex h-[20px] w-[20px] items-center justify-center rounded-full bg-red-500 text-xs text-white"
+                    >
+                      {notifications.length}
+                    </span>
+                  )}
+                  {showNotifications && <NotificationTab />}
+                </li>
                 <li
                   onClick={toggleResetPinModal}
                   className="cursor-pointer text-base transition-all duration-300 ease-in-out"

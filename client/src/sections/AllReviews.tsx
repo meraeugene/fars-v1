@@ -264,7 +264,7 @@ const AllReviews = ({
         <div className="mt-12 columns-1 gap-x-8 gap-y-4 md:columns-2 lg:columns-3 xl:columns-4">
           {allReviews.map((review) => (
             <section
-              className="mb-8 flex break-inside-avoid flex-col rounded-xl bg-[#fff] shadow-xl shadow-blue-200"
+              className="white review-text mb-8 flex max-w-[100%] break-inside-avoid flex-col rounded-xl bg-[#fff] shadow-xl shadow-blue-200"
               key={review._id}
               data-aos="fade-right"
             >
@@ -300,11 +300,11 @@ const AllReviews = ({
                   })}
                 </div>
                 <div className="mt-5 flex flex-col gap-3">
-                  <p className="text-sm font-normal leading-[1.6] text-[#333f61]">
+                  <p className="break-words text-sm font-normal leading-[1.6] text-[#333f61]">
                     {review.feedback}
                   </p>
 
-                  <p className="text-sm font-semibold leading-[1.6] text-neutral-600">
+                  <p className="text-sm font-semibold leading-[1.6] text-[#0c1b4d]">
                     - {review.name}
                   </p>
 

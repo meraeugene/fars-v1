@@ -16,6 +16,7 @@ interface ReviewDocument extends Document {
   image: string | null;
   acknowledged: boolean;
   replies: Reply[]; // Array of Reply objects
+  createdAt: Date;
 }
 
 // Create the Review Schema

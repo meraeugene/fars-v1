@@ -463,3 +463,19 @@ body.menu-open {
     transform: rotate(0);
   }
 }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #7c93dc #fff;
+}
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #0c1b4d;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #0c1b4d;
+  border: 3px solid #0c1b4d;
+  border-radius: 8px;
+}
