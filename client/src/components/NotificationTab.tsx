@@ -53,7 +53,7 @@ const NotificationTab = () => {
                   {capitalizeFirstLetter(notification.name)}
                 </span>
                 <span className="mt-1 text-gray-700">
-                  - {truncateText(notification.feedback, 20)}
+                  - {truncateText(notification.feedback, 25)}
                 </span>
               </li>
             ))}
