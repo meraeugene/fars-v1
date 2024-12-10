@@ -16,6 +16,7 @@ interface FormValues {
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
+    .matches(/^[^\d]*$/, "Name must not contain numbers") // Disallow numbers
     .required("Name is required")
     .max(50, "Name must be at most 50 characters"),
   rating: Yup.number()
@@ -24,6 +25,7 @@ const validationSchema = Yup.object().shape({
     .max(5, "Rating must be at most 5"),
   feedback: Yup.string().required("Feedback is required"),
 });
+
 
 export function ReviewForm() {
   const [createReview, { isLoading: loadingCreateReview }] =
@@ -37,34 +39,41 @@ export function ReviewForm() {
     useUploadSingleImageMutation({});
 
   const handleImageUploadAndPreview = async (
-    e: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  e: React.ChangeEvent<HTMLInputElement>,
+) => {
+  const file = e.target.files?.[0];
+  if (!file) return;
 
-    // Set image preview
-    setImagePreview(URL.createObjectURL(file));
+  // Ensure the file is not a GIF
+  if (file.type === "image/gif") {
+    toast.error("GIF images are not allowed.");
+    return;
+  }
 
-    // Prepare form data for the upload
-    const formData = new FormData();
-    formData.append("image", file);
+  // Set image preview
+  setImagePreview(URL.createObjectURL(file));
 
-    try {
-      // Upload the image
-      const response = await uploadProductImage(formData).unwrap();
-      toast.success(response.message);
+  // Prepare form data for the upload
+  const formData = new FormData();
+  formData.append("image", file);
 
-      // Store the uploaded image's URL or filename
-      setImage(response.image);
-    } catch (error) {
-      const errorMessage =
-        (error as ErrorResponse)?.data?.error ||
-        (error as ErrorResponse)?.data?.message ||
-        "An unknown error occurred.";
+  try {
+    // Upload the image
+    const response = await uploadProductImage(formData).unwrap();
+    toast.success(response.message);
 
-      toast.error(errorMessage);
-    }
-  };
+    // Store the uploaded image's URL or filename
+    setImage(response.image);
+  } catch (error) {
+    const errorMessage =
+      (error as ErrorResponse)?.data?.error ||
+      (error as ErrorResponse)?.data?.message ||
+      "An unknown error occurred.";
+
+    toast.error(errorMessage);
+  }
+};
+
 
   const handleSubmit = async (
     values: FormValues,
