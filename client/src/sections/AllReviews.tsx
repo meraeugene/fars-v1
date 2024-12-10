@@ -261,7 +261,7 @@ const AllReviews = ({
           {error?.data?.message || error.error}
         </div>
       ) : allReviews.length > 0 ? (
-        <div className="mt-12 columns-1 gap-x-8 gap-y-4 md:columns-2 lg:columns-3 xl:columns-4">
+        <div className="mt-12 columns-1 gap-x-8 gap-y-4 md:columns-2 lg:columns-3 xl:columns-3 2xl:columns-4">
           {allReviews.map((review) => (
             <section
               className="white review-text mb-8 flex max-w-[100%] break-inside-avoid flex-col rounded-xl bg-[#fff] shadow-xl shadow-blue-200"
