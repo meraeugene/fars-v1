@@ -1,7 +1,7 @@
 const Hero = ({ onGetStartedClick }: { onGetStartedClick: () => void }) => {
   return (
     <div className="hero__container flex flex-col gap-12 bg-[#f0f4ff] md:flex-row md:gap-12 md:px-10 md:pb-12 lg:items-center lg:gap-16 lg:px-16 xl:px-40">
-      <div className="content__container flex flex-col gap-4 px-5 text-center md:basis-1/2 md:px-0 xl:px-24">
+      <div className="content__container flex flex-col gap-4 px-5 text-center md:basis-1/2 md:px-0 xl:px-20">
         <h1 className="h2-bold text-[#0c1b4d]">Your Opinion Matters!</h1>
 
         <p className="p-regular-16 mb-2 text-[#333f61] lg:mb-3">
