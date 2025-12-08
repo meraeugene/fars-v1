@@ -15,33 +15,40 @@ export const s3 = new S3Client({
 } as S3ClientConfig);
 
 // AWS S3 Single upload image
-export const s3Uploadv3Image = async (file: Express.Multer.File) => {
-  const key = `uploads/${uuidv4()}-${file.originalname}`;
-  const param = {
-    Bucket: process.env.AWS_BUCKET_NAME!,
-    Key: key,
-    Body: file.buffer,
-    ContentType: file.mimetype,
-  };
+// export const s3Uploadv3Image = async (file: Express.Multer.File) => {
+//   const key = `uploads/${uuidv4()}-${file.originalname}`;
+//   const param = {
+//     Bucket: process.env.AWS_BUCKET_NAME!,
+//     Key: key,
+//     Body: file.buffer,
+//     ContentType: file.mimetype,
+//   };
 
-  // Upload the file to S3
-  await s3.send(new PutObjectCommand(param));
+//   // Upload the file to S3
+//   await s3.send(new PutObjectCommand(param));
 
-  return { key, status: "success" };
-};
+//   return { key, status: "success" };
+// };
 
 // // AWS S3 Multiple upload image
-// export const s3Uploadv3Images = async (files: Express.Multer.File[]) => {
-//   const params = files.map((file) => {
-//     return {
-//       Bucket: process.env.AWS_BUCKET_NAME!,
-//       Key: `uploads/${uuidv4()}-${file.originalname}`,
-//       Body: file.buffer,
-//       ContentType: file.mimetype,
-//     };
-//   });
+export const s3Uploadv3Images = async (files: Express.Multer.File[]) => {
+  const params = files.map((file) => {
+    const key = `uploads/${uuidv4()}-${file.originalname}`;
+    return {
+      Bucket: process.env.AWS_BUCKET_NAME!,
+      Key: key,
+      Body: file.buffer,
+      ContentType: file.mimetype,
+      key, // Include the key in the return object for tracking
+    };
+  });
 
-//   return await Promise.all(
-//     params.map((param) => s3.send(new PutObjectCommand(param)))
-//   );
-// };
+  const uploadResults = await Promise.all(
+    params.map(async (param) => {
+      await s3.send(new PutObjectCommand(param)); // Send the upload
+      return { key: param.key }; // Return the key
+    })
+  );
+
+  return uploadResults;
+};

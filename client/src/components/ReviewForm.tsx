@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
-import { ErrorResponse } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as Yup from "yup";
 import { useCreateReviewMutation } from "../slices/reviewsApiSlice";
-import { useUploadSingleImageMutation } from "@/slices/uploadsApiSlice";
+import { useUploadMultipleImagesMutation } from "@/slices/uploadsApiSlice";
 import { GrFormUpload } from "react-icons/gr";
 
 interface FormValues {
@@ -16,7 +15,6 @@ interface FormValues {
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
-    .matches(/^[^\d]*$/, "Name must not contain numbers") // Disallow numbers
     .required("Name is required")
     .max(50, "Name must be at most 50 characters"),
   rating: Yup.number()
@@ -26,79 +24,69 @@ const validationSchema = Yup.object().shape({
   feedback: Yup.string().required("Feedback is required"),
 });
 
-
 export function ReviewForm() {
   const [createReview, { isLoading: loadingCreateReview }] =
     useCreateReviewMutation();
 
   // IMAGE UPLOAD FEATURE
-  const [image, setImage] = useState<string>("");
-  const [imagePreview, setImagePreview] = useState<string | null>("");
+  const [fileDetails, setFileDetails] = useState<
+    { name: string; size: string }[]
+  >([]);
+  const [uploadedImages, setUploadedImages] = useState<string[]>([]);
 
-  const [uploadProductImage, { isLoading: uploadingImage }] =
-    useUploadSingleImageMutation({});
+  const [uploadMultipleImages] = useUploadMultipleImagesMutation({});
 
   const handleImageUploadAndPreview = async (
-  e: React.ChangeEvent<HTMLInputElement>,
-) => {
-  const file = e.target.files?.[0];
-  if (!file) return;
+    e: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    const files = e.target.files;
+    if (!files) return;
 
-  // Ensure the file is not a GIF
-  if (file.type === "image/gif") {
-    toast.error("GIF images are not allowed.");
-    return;
-  }
+    const details = [];
+    const uploaded = [];
+    for (const file of Array.from(files)) {
+      if (file.type === "image/gif") {
+        toast.error("GIF images are not allowed.");
+        continue;
+      }
 
-  // Set image preview
-  setImagePreview(URL.createObjectURL(file));
+      // Add file details
+      details.push({
+        name: file.name,
+        size: `${(file.size / (1024 * 1024)).toFixed(2)} MB`, // Convert size to MB
+      });
 
-  // Prepare form data for the upload
-  const formData = new FormData();
-  formData.append("image", file);
+      // Upload image
+      const formData = new FormData();
+      formData.append("images", file);
+      try {
+        const response = await uploadMultipleImages(formData).unwrap();
+        uploaded.push(response.image);
+      } catch (error) {
+        toast.error("Failed to upload image.");
+      }
+    }
 
-  try {
-    // Upload the image
-    const response = await uploadProductImage(formData).unwrap();
-    toast.success(response.message);
-
-    // Store the uploaded image's URL or filename
-    setImage(response.image);
-  } catch (error) {
-    const errorMessage =
-      (error as ErrorResponse)?.data?.error ||
-      (error as ErrorResponse)?.data?.message ||
-      "An unknown error occurred.";
-
-    toast.error(errorMessage);
-  }
-};
-
+    setFileDetails(details);
+    setUploadedImages(uploaded);
+  };
 
   const handleSubmit = async (
     values: FormValues,
-    { resetForm, setFieldValue }: FormikHelpers<FormValues>,
+    { resetForm }: FormikHelpers<FormValues>,
   ) => {
-    const data = {
-      ...values,
-      rating: Number(values.rating),
-      image,
-    };
-
     try {
-      await createReview(data).unwrap();
-
+      await createReview({
+        ...values,
+        images: uploadedImages,
+        rating: Number(values.rating),
+      }).unwrap();
       resetForm();
-      setImage(""); // Clear the image state
-      setImagePreview(""); // Clear the image preview
-      setFieldValue("image", ""); // Clear the Formik image field
+      setFileDetails([]);
+      setUploadedImages([]);
+      toast.success("Review submitted successfully.");
     } catch (error) {
-      const errorMessage =
-        (error as ErrorResponse)?.data?.error ||
-        (error as ErrorResponse)?.data?.message ||
-        "An unknown error occurred.";
-
-      toast.error(errorMessage);
+      toast.error("Failed to submit review.");
     }
   };
 
@@ -195,7 +183,19 @@ export function ReviewForm() {
                 />
               </label>
 
-              {/* Image Upload */}
+              {/* Render File Details */}
+              {fileDetails.length > 0 && (
+                <ul className="mt-3 space-y-2 text-sm">
+                  {fileDetails.map((file, idx) => (
+                    <li key={idx} className="flex justify-between">
+                      <span>{file.name}</span>
+                      <span>{file.size}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
+
+              {/* File Upload */}
               <label className="flex flex-col gap-2">
                 <div className="flex items-center gap-2">
                   Image{" "}
@@ -205,12 +205,13 @@ export function ReviewForm() {
                 <input
                   type="file"
                   accept="image/*"
+                  multiple
                   onChange={(e) => {
                     handleImageUploadAndPreview(e);
-                    setFieldValue("image", e.target.files?.[0]); // Store the file in Formik state
+                    setFieldValue("images", e.target.files);
                   }}
-                  className="hidden" // Hide the default file input
-                  id="image-upload" // Add an ID for the label to associate with the input
+                  className="hidden"
+                  id="image-upload"
                 />
 
                 <label
@@ -218,18 +219,8 @@ export function ReviewForm() {
                   className="shadowb-blue-100 flex w-full cursor-pointer items-center justify-center gap-2 rounded-md border border-[#4a71ff] bg-[#fff] px-3 py-3 text-center text-sm text-gray-500 shadow-xl hover:bg-blue-50"
                 >
                   <GrFormUpload fontSize={20} />
-                  Choose an image
+                  Choose images
                 </label>
-
-                {imagePreview && (
-                  <div className="mt-2">
-                    <img
-                      src={imagePreview}
-                      alt="Image Preview"
-                      className="h-auto w-full rounded-md shadow-lg"
-                    />
-                  </div>
-                )}
               </label>
             </div>
 
@@ -237,21 +228,9 @@ export function ReviewForm() {
               className="cta-button"
               type="submit"
               aria-label="submit-review"
-              disabled={isSubmitting || uploadingImage}
+              disabled={isSubmitting}
             >
-              {uploadingImage ? (
-                // Check if the image is uploading
-                <div className="flex items-center justify-center gap-3">
-                  <span className="text-sm text-white">Uploading Image</span>
-                  <l-line-spinner
-                    size="16"
-                    stroke="3"
-                    speed="1"
-                    color="#fff"
-                  ></l-line-spinner>
-                </div>
-              ) : loadingCreateReview ? (
-                // Check if the review is being created
+              {loadingCreateReview ? (
                 <div className="flex items-center justify-center gap-3">
                   <l-line-spinner
                     size="16"

@@ -52,8 +52,8 @@ const Home = () => {
   useEffect(() => {
     if (isLoggedIn) {
       // Connect to the server
-      // socket.current = io("http://localhost:5000"); // Ensure this matches your server URL
-      socket.current = io("https://fars-v1.onrender.com/"); // Ensure this matches your server URL
+      socket.current = io("http://localhost:5000"); // Ensure this matches your server URL
+      // socket.current = io("https://fars-v1.onrender.com/"); // Ensure this matches your server URL
 
       socket.current.on("connect_error", (err) => {
         console.error("Connection error:", err);

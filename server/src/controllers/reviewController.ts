@@ -54,7 +54,7 @@ const getFeaturedReviews = asyncHandler(async (req: Request, res: Response) => {
 // @Public access
 const createReview = asyncHandler(async (req, res) => {
   try {
-    const { rating, feedback, name, image } = req.body;
+    const { rating, feedback, name, images } = req.body;
 
     // Validate input
     if (!rating || !feedback || !name) {
@@ -70,12 +70,19 @@ const createReview = asyncHandler(async (req, res) => {
         .json({ message: "Rating must be a number between 1 and 5." });
     }
 
+    // Validate images
+    if (images && !Array.isArray(images)) {
+      return res
+        .status(400)
+        .json({ message: "Images must be an array of strings." });
+    }
+
     // Create a new review
     const review = new Review({
       name,
       rating: Number(rating),
       feedback,
-      image,
+      images: images || [], // Default to an empty array if no images provided
     });
 
     // Save the review
@@ -86,7 +93,7 @@ const createReview = asyncHandler(async (req, res) => {
       name: review.name,
       rating: review.rating,
       feedback: review.feedback,
-      image: review.image,
+      images: review.images,
       createdAt: review.createdAt,
     });
 

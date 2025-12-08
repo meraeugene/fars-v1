@@ -13,7 +13,7 @@ interface ReviewDocument extends Document {
   rating: number;
   feedback: string;
   likes: number;
-  image: string | null;
+  images: string[]; // Array of image URLs
   acknowledged: boolean;
   replies: Reply[]; // Array of Reply objects
   createdAt: Date;
@@ -40,10 +40,13 @@ const reviewSchema = new Schema<ReviewDocument>(
       trim: true,
       maxlength: 1000,
     },
-    image: {
-      type: String,
-      required: false,
-    },
+    images: [
+      {
+        type: String,
+        required: false, // Allows reviews without images
+        trim: true, // Ensures no accidental whitespace in URLs
+      },
+    ],
     likes: {
       type: Number,
       default: 0,

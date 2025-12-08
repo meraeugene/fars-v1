@@ -1,8 +1,8 @@
 import multer from "multer";
 import express, { NextFunction } from "express";
 import { Request, Response } from "express";
-import { s3Uploadv3Image } from "../services/s3Service";
-// import { s3Uploadv3Images } from "../services/s3Service";
+// import { s3Uploadv3Image } from "../services/s3Service";
+import { s3Uploadv3Images } from "../services/s3Service";
 
 const router = express.Router();
 
@@ -22,40 +22,49 @@ const upload = multer({
   limits: { fileSize: 5242880 }, // 5 MB in bytes
 });
 
-router.post(
-  "/image",
-  upload.single("image"),
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const { key, status } = await s3Uploadv3Image(
-        req.file as Express.Multer.File
-      );
-      const image = `${process.env.AWS_URL}/${key}`;
-      const message = "Image uploaded successfully.";
-
-      // Ensure you always return a response
-      res.status(200).json({ status, image, message });
-    } catch (error) {
-      console.error(error);
-
-      // Pass the error to the next middleware (Express error handler)
-      return next(error);
-    }
-  }
-);
-
 // router.post(
-//   "/images",
-//   upload.array("images"),
-//   async (req: Request, res: Response) => {
+//   "/image",
+//   upload.single("image"),
+//   async (req: Request, res: Response, next: NextFunction) => {
 //     try {
-//       await s3Uploadv3Images(req.files as Express.Multer.File[]);
-//       return res.json({ status: "success" });
+//       const { key, status } = await s3Uploadv3Image(
+//         req.file as Express.Multer.File
+//       );
+//       const image = `${process.env.AWS_URL}/${key}`;
+//       const message = "Image uploaded successfully.";
+
+//       // Ensure you always return a response
+//       res.status(200).json({ status, image, message });
 //     } catch (error) {
-//       console.log(error);
+//       console.error(error);
+
+//       // Pass the error to the next middleware (Express error handler)
+//       return next(error);
 //     }
 //   }
 // );
+
+router.post(
+  "/images",
+  upload.array("images"),
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const files = req.files as Express.Multer.File[];
+      const uploadedImages = await s3Uploadv3Images(files);
+
+      const imageUrls = uploadedImages.map(
+        (uploadedImage) => `${process.env.AWS_URL}/${uploadedImage.key}`
+      );
+
+      res.status(200).json({
+        message: "Images uploaded successfully.",
+        images: imageUrls,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
 
 // Multer error handler middleware
 router.use(

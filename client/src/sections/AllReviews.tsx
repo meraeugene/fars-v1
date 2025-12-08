@@ -360,7 +360,7 @@ const AllReviews = ({
                       </button>
 
                       {/* Delete Button */}
-                      <button
+                      {/* <button
                         onClick={() => {
                           setDeleteModal(true);
                           setSelectedReviewId(review._id);
@@ -369,7 +369,7 @@ const AllReviews = ({
                         className="rounded-sm border border-[#FF3B30] px-2 py-1 text-xs font-medium tracking-wider text-[#ff3b30] transition-all duration-300 hover:bg-red-100"
                       >
                         DELETE
-                      </button>
+                      </button> */}
                     </div>
                   )}
                 </div>
