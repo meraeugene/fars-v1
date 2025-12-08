@@ -10,7 +10,7 @@ import uploadImageRoutes from "./routes/uploadImageRoutes";
 import reviewRoutes from "./routes/reviewRoutes";
 import adminRoutes from "./routes/adminRoutes";
 import { notFound, errorHandler } from "./middlewares/errorMiddleware";
-import job from "./utils/cron";
+// import job from "./utils/cron";
 import http from "http"; // Import HTTP
 import { Server } from "socket.io"; // Import Socket.IO
 
